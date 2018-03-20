@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}KaziLynk Sign Up | {{ profile_cat }}{% endblock %}
+
+{% block extra_js %}
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="/static/js/script.js"></script>
+{% endblock %}
+
+{% block content %}
+	<div class="margin-top-20 remove-top-sm">
+		<div class="col-md-2 col-sm-1 hidden-xs"></div>
+		<div class="col-md-8 col-sm-10 col-xs-12 signup-div grey-bg-lite margin-bottom-30 border-box remove-bottom-sm">
+			<div class="inner-signup div-margin-top arima">
+				<h1 class="dark-grey">Register as {{ profile_cat }}</h1>
+				<label id="first_email" class="col-md-3 bold col-xs-8">Email: </label>
+				<div class="col-md-5 col-xs-10">
+					<input type="email" class="form-control" id="signup_email_1" placeholder="">
+					<i class="fa fa-check-circle hidden signup-valid-email-icon" aria-hidden="true"></i>
+					<p class="hidden email-incorrect error-message small-padding-left">Please Enter A Valid Email</p>
+					<p class="hidden email-exists error-message">Email Already Exists</p>
+				</div>
+				<div class="col-md-12 col-xs-12"></div>
+
+				<label id="second_email" class="col-md-3 bold col-xs-8">Confirm Email: </label>
+				<div class="col-md-5 col-xs-10">
+					<input type="email" class="form-control" id="signup_email_2" placeholder="">
+					<p class="hidden error-message small-padding-left email-mismatch">Please check again: Email Do Not Match</p>
+				</div>
+				<div class="col-md-12 col-xs-12"></div>
+
+				<label id="first_password" class="col-md-3 bold col-xs-8">Password: </label>
+				<div class="col-md-5 col-xs-10">
+					<input type="password" class="form-control" id="signup_password_1" placeholder="">
+					<p class="hidden error-message small-padding-left password-length">Password must be atleast 8 chars long</p>
+					<p class="hidden error-message small-padding-left password-int">Password must contain atleast 1 number</p>
+				</div>
+				<div class="col-md-12 col-xs-12"></div>
+
+				<label id="second_password" class="col-md-3 bold col-xs-8">Repeat Password: </label>
+				<div class="col-md-5 col-xs-10">
+					<input type="password" class="form-control" id="signup_password_2" placeholder="">
+					<p class="hidden error-message small-padding-left password-mismatch">Passwords do not match</p>
+				</div>
+				<div class="col-md-12 col-xs-12"></div>
+
+				<label class="col-md-12 tablet-100 width-8 mobile-width-100">
+			      <input type="checkbox" class="large-checkbox" id="signup_terms"><span class="checkbox-offset"> I have read and agree to the <a href="#">terms and conditions</a>.</span>
+			      <p class="hidden error-message small-padding-left confirm-terms">Please confirm you have read the terms and conditions</p>
+			      <p class="hidden error-message small-padding-left font-normal response-error">Sorry there seems to be an issue connecting to the server. Please try again later.</p>
+			    </label>
+			    <div class="col-md-12 col-xs-12"></div>
+
+			    <div class="col-md-12 col-xs-12">
+			    	<button id="signup_submit" class="btn btn-default light-blue-bg" type="submit">Register</button>
+			    	<i class="fa fa-circle-o-notch fa-spin loading hidden" aria-hidden="true"></i>
+			    </div>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-1 hidden-xs"></div>
+	</div>
+<span class="hidden user-category">{{ profile_cat }}</span>
+{% endblock %}

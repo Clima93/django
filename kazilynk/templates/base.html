@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}{% block head_title %}{% endblock %}</title>
+
+	<script type="text/javascript" src="/static/js/jquery.js"></script>
+	<script type="text/javascript" src="/static/js/bootstrap.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-107426556-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+	{{ home_page_cookie_js|safe }}
+
+	<script type="text/javascript">
+		jQuery(document).ready(function ($) {
+			$(".navbar-toggle").click(function(event) {
+			    $(".navbar-collapse").toggle('in');
+			});
+		});
+
+		var quotes = {{ quotes|safe }};
+		var max_length = quotes.length;
+		var counter = 0;
+
+		function isEmail(email) {
+		  var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		  return regex.test(email);
+		}
+
+		/*CSRF Code */
+
+		function csrfSafeMethod(method) {
+		    // these HTTP methods do not require CSRF protection
+		    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}
+
+		function sameOrigin(url) {
+		    // test that a given url is a same-origin URL
+		    // url could be relative or scheme relative or absolute
+		    var host = document.location.host; // host + port
+		    var protocol = document.location.protocol;
+		    var sr_origin = '//' + host;
+		    var origin = protocol + sr_origin;
+		    // Allow absolute or scheme relative URLs to same origin
+		    return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
+		        (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
+		        // or any other URL that isn't scheme relative or absolute i.e relative.
+		        !(/^(\/\/|http:|https:).*/.test(url));
+		}
+
+		/* End CSRF Code */
+
+		$(function() {
+			$('.newsletter-modal').click(function(e) {
+				e.preventDefault();
+
+				$('#newsletter-modal').modal('show');
+			});
+
+			$('.signup-newsletter').click(function() {
+				var parent = $(this).parent();
+
+				var email = parent.find('.email-field').val();
+				var valid_email = isEmail(email);
+
+				var email_field = parent.find('.email-field');
+				email_field.removeClass('red-border');
+
+				if (email == '' || valid_email == false) {
+					email_field.addClass('red-border');
+
+					//raise error
+					return {'error': true, 'type': 'invalid email'};
+				}
+
+				var csrftoken = $.cookie('csrftoken');
+
+				var data = {
+					'email': email,
+				}
+
+				$.ajax({
+		            url: "/signup-newsletter",
+		            type: "POST",
+		            dataType: 'json',
+		            beforeSend: function(xhr, settings) {
+		                if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
+		                    // Send the token to same-origin, relative URLs only.
+		                    // Send the token only if the method warrants CSRF protection
+		                    // Using the CSRFToken value acquired earlier
+		                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+		                }
+
+		                
+		            },
+		            data: JSON.stringify(data),
+		            success: function(response){
+		                if (response['status'] == 'ok') {
+		                    parent.find('.complete').removeClass('hidden').text(response['message']);
+
+		                    setTimeout(function(){ 
+		                        $('.complete').addClass('hidden');
+		                    }, 3000);
+		                }
+		                
+
+		            },
+		            error: function(xhr){
+		                                              
+		            },
+
+
+		            });
+		        
+		        /* End Ajax Call */ 
+
+			});
+
+			setInterval(function(){ 
+				if (counter == max_length) {
+					counter = 0;
+				}
+				var quote = quotes[counter];			
+
+				$('.quote-div').animate({"margin-left": "-5000px"}, 1000, function() {
+					$('.quote-div').hide();
+					$('.quote').text(quote['quote']);
+					$('.author').text(quote['author']);
+				});
+				$('.quote-div').animate({"margin-left": "5000px"}, 1000, function() {
+					$('.quote-div').show();
+				});
+				$('.quote-div').animate({"margin-left": "0px"}, 1000);	
+
+				counter += 1;
+
+			}, 10000);
+
+		});
+	</script>
+	{% block extra_js %}{% endblock %}
+
+	<link rel="stylesheet" href="/static/font-awesome/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css?v=2.2.4">
+	<link href="https://fonts.googleapis.com/css?family=Aref+Ruqaa|Arima+Madurai|Lobster|Open+Sans|Quicksand|Raleway|Roboto|Slabo+27px" rel="stylesheet">
+	<link rel="shortcut icon" type="image/png" href="/static/img/favicon.png?v=2"/>
+ 
+	{% block extra_css %}{% endblock %}
+
+	{% block extra_head %}{% endblock %}
+
+</head>
+<body>
+	<div class="homepage">
+		<div class="top-navigation">
+			<nav class="navbar navbar-default navbar-fixed-top float-left">
+			  <div class="container-fluid">
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed float-right" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <a class="navbar-brand" href="/"><span class="visible-xs alt-title">KaziLynk</span><img src="/static/img/logo.png" alt="Kazi Logo" class="hidden-xs hidden-sm" style="width: 100%;"><span class="sr-only">(current)</span></a>
+			      <a class="navbar-brand" href="/"><span class="visible-xs alt-title">KaziLynk</span><img src="/static/img/logo.png" alt="Kazi Logo" class="visible-xs visible-sm" style="width: 104px; position: absolute; left: 0px; top: 4px;"><span class="sr-only">(current)</span></a>
+			    </div>
+
+			    <!-- Collect the nav links, forms, and other content for toggling -->
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <div class="nav-top-padding"></div>
+			      <ul id="top_nav" class="nav navbar-nav pull-right">
+			        <li class=""><a href="{% url 'check_post_job' %}">Post a Job</a></li>
+			        <li><a href="{% url 'check_post_cv' %}">Post your CV</a></li>
+			        <li><a href="{% url 'check_post_service' %}">Post your service</a></li>
+			        <li><a href="{% url 'search' %}">Find a service</a></li>		        
+			        {% if not request.user.is_active %}
+				        <li class="nav-login_li-1"><a href="/accounts/login">Log In</a></li>
+				    {% else %}
+				    	<li><a href="/accounts/profile" class="pull-right"><i class="fa fa-user profile-icon" aria-hidden="true"></i></a></li>
+				    	<li><a href="/accounts/logout" class="pull-right">Log Out</a></li>
+				    {% endif %}
+			      </ul>
+			    </div><!-- /.navbar-collapse -->
+
+			    <div></div> 
+			  </div><!-- /.container-fluid -->
+			</nav>
+		</div>
+
+	<div class="description_body row {% block base_css %}{% endblock %}">
+	{% block content %}
+	
+	{% endblock %}
+
+	<div class="col-md-12 col-sm-12 col-xs-12 quotes text-center">
+		<div class="quote-div text-center col-md-12 raleway padding-top-10">
+			<p class="quote"></p>
+			<p class="author"></p>
+		</div>
+	</div>
+
+	</div>
+
+	{% block footer %}
+	<div class="footer row arima">
+		<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+			<a href="https://www.facebook.com/kazilynk/" target="_blank"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+			<a href="https://twitter.com/KazilynkAdmin" target="_blank"><i class="fa fa-twitter-square" aria-hidden="true"></i></a>
+			<a href="{% url 'lynkspiration' %}"><i class="fa fa-wordpress margin-bottom-10" aria-hidden="true"></i></a><br>
+
+			<a href="{% url 'about_us' %}">About Us</a> | <a href="{% url 'contact' %}">Contact Us</a> | <a href="{% url 'terms' %}">Terms and Conditions</a> | <a href="{% url 'privacy' %}">Privacy Policy</a> | <a href="{% url 'pricing' %}">Pricing Policy</a><br>
+			<button class="btn orange-btn margin-top-10 margin-bottom-10 newsletter-modal">Sign up for our Newsletter</button>
+		</div>
+	</div>
+	<div class="col-md-12 col-sm-12 col-xs-12 bottom-footer text-center">
+		<span class="lighter">© Copyright {% now "Y" %} All Rights Reserved | Powered by <span class="lightest">KaziLynk Limited</span></span><br>
+		<span class="lighter">Incase of issues you can contact <a href="maito:support@kazilynk.com">support@kazilynk.com</a></span>
+	</div>
+	
+	</div>
+	{% endblock %}
+
+	<!-- Modals -->
+
+	<div id="newsletter-modal" class="modal fade" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title search-modal-title bold">WANT TO GET LYNKED?</h4>
+	      </div>
+	      <div class="modal-body padding-bottom-30">
+	        <p>Join our mailing list to receive useful articles, opportunities and updates delivered to your inbox.</p>
+	        <input class="form-control email-field newsletter-field" placeholder="email@example.com">
+			<button class="btn btn-primary signup-newsletter margin-top-sm-10">Sign me up</button>
+			<p class="hidden green complete"></p>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<!-- End Modals -->
+</body>
+</html>

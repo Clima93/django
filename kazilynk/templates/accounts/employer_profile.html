@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}KaziLynk Profile Page{% endblock %}
+
+{% block extra_head %}
+	<script type="text/javascript" src="/static/js/profile-script.js"></script>
+{% endblock %}
+
+
+{% block content %}
+	<div class="col-md-3 col-sm-2 col-xs-12 padding-top">
+		<!--
+		
+		-->
+		<div class="padding-left pos-absolute profile-sidenav">
+			<a href="{% url 'employer_page' %}" class="btn btn-default profile-dashboard-btn{% ifequal request.path '/accounts/employer' %} profile-active{% endifequal %}">
+				<span class="pull-left">Dashboard</span>
+				
+
+				<i class="fa fa-tachometer pull-right profile-dashboard-icons" aria-hidden="true"></i>
+			</a>
+
+			<a href="{% url 'create_job' %}" class="btn btn-default profile-dashboard-btn{% ifequal request.path '/register/create-job' %} profile-active{% endifequal %}">
+				<span class="pull-left">Create Job</span>
+			</a>
+
+		</div>
+	</div>
+	<div class="col-md-8 col-sm-9 col-xs-12 register-div padding-bottom-default border-box {% block profile_css %}{% endblock %}">
+		<div class="arima label-bottom">
+			{% block content_box %}
+
+			{% endblock %}
+		</div>
+	</div>
+{% endblock %} 

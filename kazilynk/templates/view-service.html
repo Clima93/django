@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block title %}{{ service.service.name|default:"Service Not Found" }}{% endblock %}
+
+{% block content %}
+<div class="col-md-1 col-sm-1 hidden-xs"></div>
+<div class="col-md-10 col-sm-10 col-xs-12 margin-top-20 margin-bottom-20">
+	{% if service %}
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<h3>{{ service.service.name|safe }}</h3>
+
+			
+			<p><a href="{% url 'profile_page' %}">View Profile</a> {% if author %} | <a href="{% url 'edit_service' service.id %}">Edit Service</a>  |  <a href="{% url 'delete_service' service.id %}">Delete Service</a>{% endif %}</p>
+			
+
+			<p><span class="bold">Company Name: </span>{{ service.company_name }}</p>
+			
+			{% if service.company_website %}
+				<p><span class="bold">Company Website: </span>{{ service.company_website }}</p>
+			{% endif %}
+
+			{% if service.location %}
+				<p><span class="bold">Location: </span>{{ service.location }}</p>
+			{% endif %}
+
+			{% if service.testimonial %}
+				<p><span class="bold">Testimonial: </span>{{ service.testimonial }}</p>
+			{% endif %}
+
+			{% if service.business_details %}
+				<p><span class="bold">Business Details: </span></p>
+				{{ service.biz_details_html|safe }}
+			{% endif %}
+
+			<p><span style="font-weight: bold;">Price: </span>{{ service.price }}</p>
+			<p><span style="font-weight: bold;">Negotiable: </span>{{ service.negotiable_text }}</p>
+			{% if service.prices.all %}
+				<p><span style="font-weight: bold;">More Prices: </span></p>
+				<ul>
+					{% for price in service.prices.all %}
+						<li>{{ price.name }}</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+
+			{% if service.links.all %}
+				<p class="bold">Links</p>
+				<ul>
+					{% for link in service.links.all %}
+						{% if link.active %}
+							<li><a href="{{ link.link }}">{{ link.link }}</a></li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			{% endif %}
+
+			{% if service.uploads.all %}
+				<p class="bold">Files</p>
+				<ul>
+				{% for file in service.uploads.all %}
+					<li><a href="{{ file.file.url }}" target="_blank">{{ file }}</a></li>
+				{% endfor %}
+				</ul>
+				
+			{% endif %}
+		</div>
+	{% else %}
+		<p class='error-message'>Service not found, it's either not active or it's been taken down.</p>
+	{% endif %}
+</div>
+{% endblock %}

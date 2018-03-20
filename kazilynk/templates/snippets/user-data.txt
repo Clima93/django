@@ -1,0 +1,3 @@
+{% for query in queryset %}
+{{ query.first_name }}	{{ query.last_name }} 	{{ query.user.email }}
+{% endfor %}

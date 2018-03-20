@@ -1,0 +1,84 @@
+{% extends 'accounts/employer_profile.html' %}
+{% load thumbnail %}
+
+{% block title %}KaziLynk | Employer{% endblock %}
+
+{% block extra_css %}
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+{% endblock %}
+
+{% block extra_js %}
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="/static/js/employer-script.js?v=1.0"></script>
+{% endblock %}
+
+{% block content_box %}
+<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12 text-center margin-bottom-10">
+		<h3>Employer Dashboard</h3>
+		{% if profile.company_logo %}
+			{% thumbnail profile.company_logo "250x400" as im %}
+			<img src="{{ im.url }}" class="center img-responsive center-desktop margin-bottom-10">
+			{% endthumbnail %}
+		{% else %}
+			<img src="/static/img/employer_logo.png" class="center img-responsive center-desktop margin-bottom-10">
+		{% endif %}
+		
+		<button class="btn btn-primary upload-logo margin-bottom-10">Upload Logo</button>
+		<form action="{% url 'employer_page' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+			<input type="file" class="prof-pic hidden center-desktop" name="prof-pic">
+			<input type="submit" class="prof-submit hidden">
+		</form>
+	</div>
+	<div class="col-md-12 col-sm-12 col-xs-12">
+	  <!-- Nav tabs -->
+	  <ul id="tabs" class="nav nav-tabs" role="tablist">
+	    <li role="presentation" class="active"><a href="#job-posting" aria-controls="job-posting" role="tab" data-toggle="tab">Job Posting</a></li>
+	    <!--<li role="presentation"><a href="#candidates" aria-controls="candidates" role="tab" data-toggle="tab">Candidates</a></li>
+	    <li role="presentation"><a href="#company-profile" aria-controls="company-profile" role="tab" data-toggle="tab">Company Profile</a></li> -->
+	  </ul>
+	  <a href="{% url "create_job" %}" class="btn pull-right orange-btn" style="margin-top: -42px;">Add a Job</a>
+
+	  <!-- Tab panes -->
+	  <div class="tab-content">
+	    <div role="tabpanel" class="tab-pane active" id="job-posting">
+	    	<div class="col-md-12 col-sm-12 col-xs-12 margin-top-20">
+	    		<p>{{ profile.jobs_counter }} JOB POSTING</p>
+	    		{% for job in jobs %}
+	    		<div class="row {% cycle 'light-grey-bg' '' %} padding-top-10">
+	    			<div class="col-md-3 col-sm-3 col-xs-3">
+	    				<a href="{% url "view_job" job.id %}">{{ job.job_title }}</a>
+	    				<p class="{{ job.status_class }}">{{ job.check_status }}</p>
+	    			</div>
+	    			<div class="col-md-3 col-sm-3 col-xs-3">
+	    				<p>Expires {{ job.end_date }}</p>
+	    			</div>
+	    			<div class="col-md-3 col-sm-3 col-xs-3">
+	    				<p>{{ job.views }} Views</p>
+	    			</div>
+
+	    			<div class="col-md-3 col-sm-3 col-xs-3">
+	    				<p>{{ job.job_matches }} Matches</p>
+	    			</div>
+	    		</div>
+	    		{% endfor %}
+	    		
+	    	</div>
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="candidates">
+
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="company-profile">
+	    	<div class="col-md-12 col-sm-12 col-xs-12 margin-top-20">
+	    		<p><span class="bold">Company Name:</span> {{ profile.company_name }}</p>
+	    		<p><span class="bold">Company Size:</span> {{ profile.company_size }}</p>
+	    	</div>
+	    </div>
+	  </div>
+
+	</div>
+</div>
+{% endblock %}

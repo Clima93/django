@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="col-md-1 col-sm-1 hidden-xs"></div>
+<div class="col-md-9 col-sm-10 col-xs-12 col-xs-11 register-div">
+	{% if status %}
+	<p class="green">Please check your email for full info.</p>
+	{% else %}
+	<p class="error-message">There seems to have been an issue with completing the task.</p>
+	{% endif %}
+</div>
+{% endblock %}

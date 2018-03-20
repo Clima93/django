@@ -1,0 +1,43 @@
+{% for service in services %}
+	<h3><b>{{ service.name }}</b></h3>
+	<p>Active Providers: {{ service.active_providers }}<p>
+
+	{% for service in service.users.all %}
+		{% if service.active %}
+			<p><span style="font-weight: bold;">Company Name: </span>{{ service.company_name }}</p>
+			{% if service.location %}
+				<p><span style="font-weight: bold;">Location: </span>{{ service.location }}</p>
+			{% endif %}
+			{% if service.testimonial %}
+				<p><span style="font-weight: bold;">Testimonial: </span>{{ service.testimonial }}</p>
+			{% endif %}
+			{% if service.business_details %}
+				<p><span style="font-weight: bold;">Business Details: </span>{{ service.business_details }}</p>
+			{% endif %}
+			{% if service.links.all %}
+				<ul>
+					{% for link in service.links.all %}
+						{% if link.active %}
+							<li><a href="{{ link.link }}">{{ link.link }}</a></li>
+						{% endif %}
+					{% endfor %}
+				</ul>
+			{% endif %}
+			<p><span style="font-weight: bold;">Price: </span>{{ service.price }}</p>
+			<p><span style="font-weight: bold;">Negotiable: </span>{{ service.negotiable_text }}</p>
+			{% if service.prices.all %}
+				<p><span style="font-weight: bold;">More Prices: </span></p>
+				<ul>
+					{% for price in service.prices.all %}
+						<li>{{ price.name }}</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+			<a href="https://kazilynk.com{% url 'contact_provider' service.id %}?email={{ email }}">Contact/Hire</a>
+		{% endif %}
+
+	<p style="border-bottom: 1px solid #C6C2C2;"></p>
+	{% endfor %}
+	<p style="border-bottom: 1px solid #C6C2C2;"></p>
+
+{% endfor %}

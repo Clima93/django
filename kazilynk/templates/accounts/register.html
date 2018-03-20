@@ -1,0 +1,249 @@
+{% extends 'base.html' %}
+
+{% block title %}KaziLynk Register{% endblock %}
+
+{% block extra_js %}
+	<script type="text/javascript" src="/static/js/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="/static/js/register2-script.js?v=1.0"></script>
+{% endblock %}
+
+{% block content %}
+	<div class="col-md-12 col-sm-12 col-xs-12" style="margin-top: 40px; margin-left: 10px;">
+	  <!-- Nav tabs -->
+	  <ul id="tabs" class="nav nav-tabs" role="tablist">
+	    <li role="presentation" class="active"><a href="#employers" aria-controls="employers" role="tab" data-toggle="tab">Employers</a></li>
+	    <li role="presentation"><a href="#job-seeker" aria-controls="job-seeker" role="tab" data-toggle="tab">Job Seeker</a></li>
+	    <li role="presentation"><a href="#service-providers" aria-controls="service-providers" role="tab" data-toggle="tab">Service Providers</a></li>
+	    <li role="presentation"><a href="#service-seekers" aria-controls="service-seekers" role="tab" data-toggle="tab">Service Seekers</a></li>
+	  </ul>
+
+	</div>
+
+	<!-- Tab panes -->
+	<div id="register" class="tab-content">
+		<div role="tabpanel" class="tab-pane active" id="employers">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="inner-content">
+					<h3 class="text-center">REGISTER AS AN EMPLOYER FOR FREE</h3>
+					<p class="text-center margin-bottom-20">Get matched with the right candidate for your needs</p>
+					
+					<label class="col-md-3 col-sm-3 col-xs-12">Full Name *</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="text" class="form-control names" placeholder="First and Last name">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12"></div>
+
+					<label class="col-md-3 col-sm-3 col-xs-12">Email *</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="email" class="form-control email" placeholder="you@example.com">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12"></div>
+
+					<label class="col-md-3 col-sm-3 col-xs-12">Password *</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="password" class="form-control pswd" placeholder="Create password">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12"></div>
+
+					<label class="col-md-3 col-sm-3 col-xs-12">Confirm Password*</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="password" class="form-control repeat-pswd" placeholder="Repeat Password">
+						<p class="error-message hidden password-mismatch">Passwords don't match!</p>
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<p>By registering you agree to Kazilynk's <a href="{% url 'terms' %}" class="orange-link" target="_blank">Terms of Service</a> and <a href="{% url 'privacy' %}" class="orange-link" target="_blank">Privacy Policy</a>. You also agree to receive subsequent emails from Kazilynk which you may opt out of at any time</p>
+					<button class="btn orange-btn margin-bottom-10 send-form">GET STARTED</button>
+					<i class="fa fa-circle-o-notch fa-spin loading hidden" aria-hidden="true"></i>
+					<p class="complete-message hidden soft-green">Account has been created successfully please check email to activate account.</p>
+					<p class="server-error hidden error-message"></p>
+					<p>Already have an account? <a href="/accounts/login" class="orange-link">LOG IN</a></p>
+					</div>
+
+				</div>
+					
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-12 text-center">
+				<div class="register-side-div">
+					<h3 style="color: black;">3 Reasons why Kazilynk does it better</h3>
+					<p style="font-weight: bold;">We save you time and money and spare you the frustration</p>
+					<p>We eliminate the hassle of placing numerous ads, reading dozens of resumes and interviewing candidates who say they are qualified, but just don't make the cut</p>
+					<p>----</p>
+					<p style="font-weight: bold;">Kazilynk candidates are motivated to stay motivated</p>
+					<p>Our rating system ensures that candidates you employ from Kazilynk stay on top of their game during their tenure with you</p>
+					<p>----</p>
+					<p style="font-weight: bold;">You only pay after a successful hire</p>
+					<p>You ONLY pay Kazilynk once you have hired candidates you are happy with</p>
+					<a href="{% url 'pricing' %}" class="orange-link" target="_blank">Click here to view our pricing policy</a>
+				</div>
+					
+			</div>
+			
+		</div>
+		<div role="tabpanel" class="tab-pane" id="job-seeker">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="inner-content">
+					<h3 class="text-center">REGISTER AS A JOB SEEKER FOR FREE</h3>
+					<p class="text-center margin-bottom-20">Get matched with the a job that calls for your talents and qualifications</p>
+					
+					<label class="col-md-3 col-sm-3 col-xs-12">Full Name *</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="text" class="form-control names" placeholder="First and Last name">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12"></div>
+
+					<label class="col-md-3 col-sm-3 col-xs-12">Email *</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="email" class="form-control email" placeholder="you@example.com">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12"></div>
+
+					<label class="col-md-3 col-sm-3 col-xs-12">Password *</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="password" class="form-control pswd" placeholder="Create password">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12"></div>
+
+					<label class="col-md-3 col-sm-3 col-xs-12">Confirm Password*</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="password" class="form-control repeat-pswd" placeholder="Repeat Password">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<p>By registering you agree to Kazilynk's <a href="{% url 'terms' %}" class="orange-link" target="_blank">Terms of Service</a> and <a href="{% url 'privacy' %}" class="orange-link" target="_blank">Privacy Policy</a>. You also agree to receive subsequent emails from Kazilynk which you may opt out of at any time</p>
+					<button class="btn orange-btn margin-bottom-10 send-form">GET STARTED</button>
+					<i class="fa fa-circle-o-notch fa-spin loading hidden" aria-hidden="true"></i>
+					<p class="complete-message hidden soft-green">Account has been created successfully please check email to activate account.</p>
+					<p class="server-error hidden error-message"></p>
+					<p>Already have an account? <a href="/accounts/login" class="orange-link">LOG IN</a></p>
+					</div>
+				</div>
+					
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-12 text-center">
+				<div class="register-side-div">
+					<h3 style="color: black;">3 Reasons why Kazilynk does it better</h3>
+					<p style="font-weight: bold;">We don't waste your time or give false hope</p>
+					<p>On Kazilynk, you don't apply for jobs you stand no chance of getting; neither do you send your CV into void in the hope that it will catch someone's attention. Once your profile is on our database, you just sit back and let our technology do the match making.</p>
+					<p>----</p>
+					<p style="font-weight: bold;">We give you a fair chance</p>
+					<p>As long as your profile is in our database, you will ALWAYS be considered for available opportunities, if you are the right candidate for the opportunity, you will get a fair chance of getting the job you deserve, if you aren't the right fit, don't lose hope, the right opportunity will eventually come your way.</p>
+					<p>----</p>
+					<p style="font-weight: bold;">You get what you ask for</p>
+					<p>A detailed, updated profile that honestly and accurately represents who you are will guarantee tha you will only be connected with jobs that are a good fit for you. You end up doing what you WANT to do as opposed to doing what you HAVE to do.</p>
+				</div>
+				
+			</div>
+
+		</div>
+		<div role="tabpanel" class="tab-pane" id="service-providers">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="inner-content">
+					<h3 class="text-center">REGISTER AS A SERVICE PROVIDER FOR FREE</h3>
+					<p class="text-center margin-bottom-20">Get matched with ready customers who need your service</p>
+					
+					<label class="col-md-3 col-sm-3 col-xs-12">Full Name *</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="text" class="form-control names" placeholder="First and Last name">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12"></div>
+
+					<label class="col-md-3 col-sm-3 col-xs-12">Email *</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="email" class="form-control email" placeholder="you@example.com">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12"></div>
+
+					<label class="col-md-3 col-sm-3 col-xs-12">Password *</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="password" class="form-control pswd" placeholder="Create password">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12"></div>
+
+					<label class="col-md-3 col-sm-3 col-xs-12">Confirm Password*</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="password" class="form-control repeat-pswd" placeholder="Repeat Password">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<p>By registering you agree to Kazilynk's <a href="{% url 'terms' %}" class="orange-link" target="_blank">Terms of Service</a> and <a href="{% url 'privacy' %}" class="orange-link" target="_blank">Privacy Policy</a>. You also agree to receive subsequent emails from Kazilynk which you may opt out of at any time</p>
+					<button class="btn orange-btn margin-bottom-10 send-form">GET STARTED</button>
+					<i class="fa fa-circle-o-notch fa-spin loading hidden" aria-hidden="true"></i>
+					<p class="complete-message hidden soft-green">Account has been created successfully please check email to activate account.</p>
+					<p class="server-error hidden error-message"></p>
+					<p>Already have an account? <a href="/accounts/login" class="orange-link">LOG IN</a></p>
+					</div>
+				</div>
+					
+				
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-12 text-center">
+				<div class="register-side-div">
+					<h3 style="color: black;">3 Reasons why Kazilynk does it better</h3>
+					<p style="font-weight: bold;">We connect you with real customers in real time</p>
+					<p>Just specify the service you provide and let us find the right customers for you</p>
+					<p>----</p>
+					<p style="font-weight: bold;">We help you to build a trusted brand</p>
+					<p>Through our customers feedback system we give new potential customers more reason to trust you and use your services</p>
+					<p>----</p>
+					<p style="font-weight: bold;">We help you market your service at no charge</p>
+					<p>Our free listings will save you money that you would otherwise spend on advertising your services online.</p>
+					<a href="{% url 'pricing' %}" class="orange-link" target="_blank">Click here to view our pricing policy</a>
+				</div>
+				
+			</div>
+		</div>
+		<div role="tabpanel" class="tab-pane" id="service-seekers">
+			<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="inner-content">
+					<h3 class="text-center">REGISTER AS A SERVICE SEEKER FOR FREE</h3>
+					<p class="text-center margin-bottom-20">Find the service you need NOW!</p>
+					
+					<label class="col-md-3 col-sm-3 col-xs-12">Full Name *</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="text" class="form-control names" placeholder="First and Last name">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12"></div>
+
+					<label class="col-md-3 col-sm-3 col-xs-12">Email *</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="email" class="form-control email" placeholder="you@example.com">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12"></div>
+
+					<label class="col-md-3 col-sm-3 col-xs-12">Password *</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="password" class="form-control pswd" placeholder="Create password">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12"></div>
+
+					<label class="col-md-3 col-sm-3 col-xs-12">Confirm Password*</label>
+					<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+						<input type="password" class="form-control repeat-pswd" placeholder="Repeat Password">
+					</div>
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<p>By registering you agree to Kazilynk's <a href="{% url 'terms' %}" class="orange-link" target="_blank">Terms of Service</a> and <a href="{% url 'privacy' %}" class="orange-link" target="_blank">Privacy Policy</a>. You also agree to receive subsequent emails from Kazilynk which you may opt out of at any time</p>
+					<button class="btn orange-btn margin-bottom-10 send-form">GET STARTED</button>
+					<i class="fa fa-circle-o-notch fa-spin loading hidden" aria-hidden="true"></i>
+					<p class="complete-message hidden soft-green">Account has been created successfully please check email to activate account.</p>
+					<p class="server-error hidden error-message"></p>
+					<p>Already have an account? <a href="/accounts/login" class="orange-link">LOG IN</a></p>
+					</div>
+				</div>
+					
+				
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-12 text-center">
+				<div class="register-side-div">
+					<h3 style="color: black;">3 Reasons why Kazilynk does it better</h3>
+					<p style="font-weight: bold;">We deliver professionals to you instantly</p>
+					<p>Our matching algorithms will deliver results within minutes of your request</p>
+					<p>----</p>
+					<p style="font-weight: bold;">We help you find trusted service providers</p>
+					<p>Through our cutomer feedback system we give you more reason to trust the businesses listed on our website</p>
+					<p>----</p>
+					<p style="font-weight: bold;">Our services are 100% FREE for you</p>
+					<p>You may use Kazilynk to get multiple quotations from businesses but are under no obligation to hire any of them.</p>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+{% endblock %}

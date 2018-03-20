@@ -1,0 +1,3 @@
+New Industry created with the name: "{{ name }}". It will become active two hours from now.
+
+To Demote it click {{ demote_link }} or activate it click {{ activate_link }} .

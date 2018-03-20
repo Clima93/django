@@ -1,0 +1,40 @@
+#inner-page {
+  background-image:url(../../assets/img/inner-pages.jpg);
+  height:23rem;
+  background-size:cover;
+  padding:2.5rem;
+}
+
+.edit {
+  height:4.5rem;
+  background-color:rgba(0,14,89,0.8);
+  padding:1.5rem;
+}
+
+.p_black {
+  color:#212529;
+  text-align:left;
+  padding:1.5rem;
+  background-color:#eaf4ff;
+}
+
+.jumbotron.inner {
+  background-color:rgba(0,14,89,0.8);
+  color:#fff;
+  line-height:1.8;
+  width:100%;
+  border-radius:0;
+  padding-left:2rem;
+  margin-top:3.5rem;
+}
+
+.pricing {
+  margin-top:0.7rem;
+  color:#fff;
+  height:3.2rem;
+  padding:0.4rem;
+  font-size:1.5em;
+  background-color:#007bff;
+  border-radius:0.3rem;
+}
+

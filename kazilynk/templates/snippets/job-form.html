@@ -1,0 +1,314 @@
+<label class="col-md-4 col-sm-4 col-xs-12">Company Name: </label>
+<div class="col-md-7 col-sm-8 col-xs-12">
+	<input class="form-control company-name" type="text">
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-20"></div>
+
+<label class="col-md-4 col-sm-4 col-xs-12">Size of Company: </label>
+<div class="col-md-7 col-sm-8 col-xs-12">
+	<select class="selectpicker company-size" title="Select One">
+		<option></option>
+		<option>1-5 employees</option>
+		<option>6- 20 employees</option>
+		<option>21-50 employees</option>
+		<option>51-100 employees</option>
+		<option>More than 100 Employees</option>
+	</select>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-20"></div>
+
+<label class="col-md-4 col-sm-4 col-xs-12">Job Title: </label>
+<div class="col-md-7 col-sm-8 col-xs-12">
+	<input class="form-control jb-title" type="text">
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-20"></div>
+
+<label class="col-md-4 col-sm-4 col-xs-12">Key responsibility: </label>
+<div class="col-md-6 col-sm-8 col-xs-12">
+	<textarea class="form-control textarea-height responsibility"></textarea>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-20"></div>
+
+<label class="col-md-4 col-sm-4">What is the job type?</label>
+<div class="col-md-7 col-sm-6">
+	<select class="selectpicker job-type" title="Select One">
+		<option></option>
+		<option>Full time</option>
+		<option>Part-time</option>
+		<option value="new" class="light-blue">Other</option>
+	</select>
+	<input type="form-control" name="" class="hidden other-job-type form-control input-padding" placeholder="Please Specify">
+	<p class="hidden error-message job-type-error job-seeker-content-spacing">Please Select One</p>
+</div>
+<div class="col-md-12 col-sm-12 input-padding"></div>
+
+<label class="col-md-4 col-sm-4 font-normal">What is the job level?</label>
+<div class="col-md-7 col-sm-6">
+	<select class="selectpicker job-level" title="Select One">
+		<option></option>
+		<option>Internship</option>
+		<option>Entry level</option>
+		<option>Mid level</option>
+		<option>Senior level</option>
+	</select>
+	<p class="hidden error-message job-level-error job-seeker-content-spacing">Please Select One</p>
+</div>
+<div class="col-md-12 col-sm-12 input-padding"></div>
+
+<label class="col-md-4 col-sm-4 font-normal">When does this job start?</label>
+<div class="col-md-7 col-sm-6">
+	<input class="form-control" id="start-date" placeholder="Select a date">
+</div>
+<div class="col-md-12 col-sm-12 input-padding"></div>
+
+<label class="col-md-4 col-sm-4">Job post will expire on</label>
+<div class="col-md-7 col-sm-6">
+	<input class="form-control" id="end-date" placeholder="Select a date">
+</div>
+<div class="col-md-12 col-sm-12 input-padding"></div>
+
+<label class="col-md-4 col-sm-4 font-normal">What is the salary range? Provide minimum and maximum</label>
+<div class="col-md-7 col-sm-6">
+	<div class="row">
+		<div class="col-md-6 col-sm-6 col-xs-6">
+			<input class="form-control minimum-salary" placeholder="Minimum Salary">
+		</div>
+		<div class="col-md-6 col-sm-6 col-xs-6">
+			<input class="form-control maximum-salary" placeholder="Maximum Salary">
+		</div>
+	</div>
+</div>
+<div class="col-md-12 col-sm-12 input-padding"></div>
+
+<label class="col-md-4 col-sm-4 font-normal">Salary's currency</label>
+<div class="col-md-7 col-sm-6">
+	<select class="selectpicker currency" title="Select One">
+		<option></option>
+		<option>Ksh</option>
+		<option>USD</option>
+	</select>
+</div>
+<div class="col-md-12 col-sm-12 input-padding"></div>
+
+<label class="col-md-4 col-sm-4 font-normal">What is the work location?</label>
+<div class="col-md-7 col-sm-6">
+	<select class="work-location">
+	  <option value="">---- Please Select One ----</option>
+	  {% for co in countries %}
+	  	<option value="{{ co.0 }}">{{ co.1 }}</option>
+	  {% endfor %}
+	  <option disabled>-----------------------------</option>
+	  <optio>rest of Afica</option>
+	  <option>Europe</option>
+	  <option>Asia</option>
+	  <option>Middle East</option>
+	  <option>The Americas</option>
+	  <option class="light-blue bold" value="new">Add Location</option>
+	</select>
+	<input class="form-control hidden new-location margin-top-10" placeholder="Enter Location's name">
+	<p class="error-message hidden work-location-error">Please select Work Location</p>
+	<div class="job-seeker-content-spacing"></div>		
+</div>
+<div class="col-md-12 col-sm-12 input-padding"></div>
+
+<h3 class="col-md-12 col-sm-12 col-xs-12 bottom-border margin-bottom-20 padding-bottom-10">CANDIDATE DETAILS</h3>
+
+<label class="col-md-4 col-sm-4">Candidate’s education level</label>
+<div class="col-md-6 col-sm-6">
+	<select class="selectpicker education-level" title="Please Select One">
+		<option></option>
+		<option>High School</option>
+		<option>College</option>
+		<option>University</option>
+	</select>
+	<p class="error-message hidden education-level-error">Please Select One</p>
+	<div class="job-seeker-content-spacing"></div>
+	<input type="checkbox" class="education-level-radio">
+	<span class="small-padding-left">N/A (Not Applicable)</span>
+</div>
+<div class="col-md-12 col-sm-12 input-padding"></div>
+
+
+<label class="col-md-4 col-sm-4">Education institutions attended </label>
+<div class="col-md-6 col-sm-6">
+	<select class="selectpicker education-institutions" title="Please select up to 5" multiple data-max-options="5">
+		<option></option>
+		{% for ins in institutions %}
+			<option>{{ ins.name }}</option>
+		{% endfor %}
+		<option value="new" class="light-blue bold">Add Institution</option>
+	</select>
+	<input class="hidden new-institute form-control margin-top-10">
+	<p class="institution-error hidden error-message">Please Select One</p>
+	<div class="job-seeker-content-spacing"></div>	
+	<input type="checkbox" class="education-radio">
+	<span class="small-padding-left">N/A (Not Applicable)</span>	
+</div>
+<div class="col-md-12 col-sm-12 input-padding"></div>
+
+
+<label class="col-md-4 col-sm-4">Additional training /certifications </label>
+<div class="col-md-8 col-sm-8">
+	<textarea class="form-control training textarea-height"></textarea>
+	<input type="checkbox" name="" class="training-radio">
+	<span class="small-padding-left">N/A (Not Applicable)</span>
+	<p class="error-message hidden training-error">Please Select One</p>
+
+	<div class="job-seeker-content-spacing"></div>		
+</div>
+<div class="col-md-12 col-sm-12 input-padding"></div>
+
+
+<label class="col-md-4 col-sm-4">Candidate’s work experience </label>
+<div class="col-md-8 col-sm-8">
+	<textarea class="form-control textarea-height work-experience"></textarea>
+	<input type="checkbox" name="" class="work-experience-radio">
+	<span class="small-padding-left">N/A (Not Applicable)</span>
+	<p class="hidden error-message work-experience-error">Please Specify</p>
+	<div class="job-seeker-content-spacing"></div>		
+</div>
+<div class="col-md-12 col-sm-12 input-padding"></div>
+
+
+<label class="col-md-4 col-sm-4 font-normal">Candidate’s soft skills</label>
+<div class="col-md-8 col-sm-8">
+	<select class="selectpicker skills job-seeker-content-spacing" multiple title="Select Skills">
+		<option></option>
+		{% for skill in skills %}
+			<option value="{{ skill.name }}">{{ skill.name }}</option>
+		{% endfor %}
+		<option value="new" class="light-blue">Add Skill</option>
+	</select>
+
+	<input class="form-control new-skill hidden job-seeker-content-spacing" placeholder="Please Specify">
+	<p class="error-message hidden skill-error">Please Select One</p>
+	<p class="light-blue small-text">Soft skills are personal attributes that enable someone to interact effectively and harmoniously with other people.</p>
+</div>
+<div class="col-md-12 col-sm-12 input-padding"></div>
+
+<label class="col-md-4 col-sm-4 font-normal">Candidate’s hard skills</label>
+<div class="col-md-8 col-sm-8">
+	<select class="selectpicker hard-skills job-seeker-content-spacing" multiple title="Select Hard Skills">
+		<option></option>
+		{% for skill in hardskills %}
+			<option>{{ skill.name }}</option>
+		{% endfor %}
+		<option value="new" class="light-blue">Add Skill</option>
+	</select>
+
+	<input class="form-control new-hard-skill hidden job-seeker-content-spacing" placeholder="Please Specify">
+	<p class="error-message hidden hard-skill-error">Please Select One</p>
+	<p class="light-blue small-text">Hard skills are specific, teachable skills that can be defined and measured.</p>
+</div>
+<div class="col-md-12 col-sm-12 input-padding"></div>
+
+<label class="col-md-8 col-sm-8">Languages spoken by candidate</label>
+<div class="col-md-12 col-sm-12 job-seeker-content-spacing">
+		<input type="checkbox" name="" class="language-radio">
+		<span class="small-padding-left">N/A (Not Applicable)</span>
+	</div>
+<div class="col-md-12 col-sm-12 co-xs-12 col-lg-12">
+	<div class="work-experience-div col-md-12 padding-bottom-10" exp_id="">
+	<label class="col-md-3 col-sm-3">Language</label>
+	<div class="col-md-8 col-sm-6">
+		<select class="selectpicker language" title="{{ exp.language|default:'Select a language' }}">
+			<option></option>
+			<option>English</option>
+			<option>Māori</option>
+			<option>Afrikaans</option>
+			<option>Arabic</option>
+			<option>Bahasa Indonesian</option>
+			<option>Chinese - Cantonese</option>
+			<option>Chinese - Mandarin</option>
+			<option>Cook Islands Maori</option>
+			<option>Dutch</option>
+			<option>French</option>
+			<option>German</option>
+			<option>Greek</option>
+			<option>Hindi</option>
+			<option>Italian</option>
+			<option>Japanese</option>
+			<option>Korean</option>
+			<option>Malaysian</option>
+			<option>Portuguese</option>
+			<option>Russian</option>
+			<option>Samoan</option>
+			<option>Spanish</option>
+			<option>Thai</option>
+			<option>Tongan</option>
+			<option>Vietnamese</option>
+			<option value="other">Other</option>
+		</select>
+		<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+		<input type="text" name="" class="form-control job-seeker-content-spacing hidden new-language" placeholder="Please Specify">
+	</div>
+	<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+	<label class="col-md-3 col-sm-3">Reading Level</label>
+	<div class="col-md-8 col-sm-6">
+		<select class="selectpicker reading-level" title="{{ exp.reading_level|default:'Select One' }}">
+			<option></option>
+			<option>Fluent</option>
+			<option>Advanced</option>
+			<option>Fair</option>
+			<option>Minimal</option>
+			<option>None</option>
+		</select>
+	</div>
+	<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+	<label class="col-md-3 col-sm-3">Writing Level</label>
+	<div class="col-md-8 col-sm-6">
+		<select class="selectpicker writing-level" title="{{ exp.writing_level|default:'Select One' }}">
+			<option></option>
+			<option>Fluent</option>
+			<option>Advanced</option>
+			<option>Fair</option>
+			<option>Minimal</option>
+			<option>None</option>
+		</select>
+	</div>
+	<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+	<label class="col-md-3 col-sm-3">Verbal Level</label>
+	<div class="col-md-8 col-sm-6">
+		<select class="selectpicker verbal-level" title="{{ exp.verbal_level|default:'Select One' }}">
+			<option></option>
+			<option>Fluent</option>
+			<option>Advanced</option>
+			<option>Fair</option>
+			<option>Minimal</option>
+			<option>None</option>
+		</select>
+	</div>
+
+</div>
+
+<div class="new-lang"></div>
+
+<div class="col-sm-12 col-md-12"><a href="#" class="duplicate">Add another</a></div>
+	<div class=""></div>
+	<p class="hidden error-message language-error">Please select atleast one or click N/A</p>
+	<input type="" name="" class="form-control hidden new-language input-padding" placeholder="Please Specify">
+
+
+</div>
+<div class="col-md-12 col-sm-12 margin-bottom-small"></div>
+
+<label class="col-md-4 col-sm-4 font-normal">Any personality preferences?</label>
+<div class="col-md-8 col-sm-8">
+	<textarea class="form-control textarea-height personality"></textarea>
+</div>
+<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+<label class="col-md-4 col-sm-4">Please provide the contacts you would like us to send shortlisted candidates to:</label>
+<div class="col-md-6 col-sm-6">
+	<input type="" name="" class="form-control contacts">
+	<div class="col-md-12 col-sm-12 job-seeker-content-spacing zero-padding-left zero-margin-bottom">
+		<input type="checkbox" name="" class="contacts-radio">
+		<span class="small-padding-left">Just Me: ({{ request.user.email }})</span>
+	</div>
+	<p class="error-message hidden contacts-error">Please specify recipients</p>
+	<span class="light-blue font-size-11">Separate emails with space or comma</span>
+</div>
+<div class="col-md-12 col-sm-12"></div>

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}KaziLynk Job Seekers{% endblock %}
+
+{% block content %}
+	<div id="job-seekers-background-image" class="col-md-12 col-sm-12 col-xs-12">
+		<img src="/static/img/demo_background/bg_3_small.jpg" class="img-responsive" alt="BackGround Image">
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-12">
+		<div id="job-top-description">
+			<h2 class="hidden-sm hidden-xs text-center">Hiring is a headache, we know...</h2>
+			<h3 class="visible-sm">Hiring is a headache, we know...</h3>
+			<h4 class="visible-xs">Hiring is a headache, we know...</h4>
+			<p class="hidden-xs">And the pain is not in getting candidates, it's in getting the RIGHT candidates. Being inundated with hundreds or even thousands of applicants can seem like an insurmountable obstacle. How do you narrow down the pool to a handful of potential candidated and finally, a single hire? Either with great difficulty or with KaziLynk.</p>
+			<p id="job-seeker-small-p" class="visible-xs">And the pain is not in getting candidates, it's in getting the RIGHT candidates. Being inundated with hundreds or even thousands of applicants can seem like an insurmountable obstacle. How do you narrow down the pool to a handful of potential candidated and finally, a single hire? Either with great difficulty or with KaziLynk.</p>
+		</div>
+	</div>
+
+	<div class="col-md-4 col-sm-4 col-xs-12 job-seeker-detail-div1 text-center">
+		<img src="/static/img/on-lap.png" alt="On Laptop" class="img-responsive job-seeker-set-img hidden-xs">
+		<h3 class="header-text">STEP 1</h3>
+		<p class="job-seeker-text job-seeker-p">Enter the details of the criteria for your ideal candidate</p>
+	</div>
+	<div class="col-md-4 col-sm-4 col-xs-12 text-center">
+		<img src="/static/img/computer.png" alt="Computer" class="img-responsive job-seeker-set-img hidden-xs">
+		<h3 class="header-text">STEP 2</h3>
+		<p class="job-seeker-text job-seeker-p">We filter job seekers according to your requirements</p>
+	</div>
+	<div class="col-md-4 col-sm-4 col-xs-12 text-center">
+		<img src="/static/img/line.png" alt="Line" class="img-responsive job-seeker-set-img hidden-xs">
+		<h3 class="header-text">STEP 3</h3>
+		<p class="job-seeker-text job-seeker-p">You receive a shortlist of the top candidates that match your criteria</p>
+	</div>
+
+	<div id="employ-bottom-button" class="col-xs-12 col-md-12 col-sm-12">
+		<p class="text-center"><a class="btn btn-default" href="{% url 'register' %}" role="button">GET STARTED</a></p>
+	</div>
+{% endblock %}

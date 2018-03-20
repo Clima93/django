@@ -1,0 +1,120 @@
+<label class="col-md-4 col-sm-4 col-xs-12">Business/Company Name</label>
+<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+	<input class="form-control company-name" type="text">
+</div>
+
+<label class="col-md-4 col-sm-4 col-xs-12">Email address</label>
+<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+	<input class="form-control email" type="text">
+</div>
+
+<label class="col-md-4 col-sm-4 col-xs-12">Phone number</label>
+<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20">
+	<input class="form-control phone-no" type="text">
+</div>
+
+<label class="col-md-4 col-sm-4 col-xs-12 font-normal">Company website or Facebook page URL</label>
+<div class="col-md-8 col-sm-8 col-xs-12">
+	<input class="form-control company-website" type="text" placeholder="Copy and paste URL if applicable">
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-20"></div>
+
+<label class="col-md-4 col-sm-4 col-xs-12 font-normal">Location</label>
+<div class="col-md-8 col-sm-8 col-xs-12">
+	<select class="selectpicker float-bottom location" title="Please Select One">
+	  	<option></option>
+	  	{% for location in locations %}
+	  		<option>{{ location.name }}</option>
+	  	{% endfor %}
+	  	<option class="add-location dark-blue bold">Add a Location</option>
+	</select>
+	<input class="hidden new-location form-control margin-top-20" placeholder="Please add a new location">
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-20"></div>
+
+<label class="col-md-4 col-sm-4 col-xs-12">What service do you provide</label>
+<div class="col-md-8 col-sm-8 col-xs-12">
+	<select class="selectpicker float-bottom service" title="Please select one or choose add a service">
+		<option></option>
+		{% for service in services %}
+			<option>{{ service.name|safe }}</option>
+		{% endfor %}
+		<option class="add-service dark-blue bold">Add a Service</option>
+	</select>
+	<input class="hidden new-service form-control margin-top-20" placeholder="Please add a new service">
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-20"></div>
+
+<label class="col-md-4 col-sm-4 col-xs-12">Business details</label>
+<div class="col-md-8 col-sm-8 col-xs-12">
+	<textarea class="form-control textarea-height business-details" placeholder="provide detailed information about the nature of your work"></textarea>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-20"></div>
+
+<label class="col-md-4 col-sm-4 col-xs-12 font-normal">Testimonials</label>
+<div class="col-md-8 col-sm-8 col-xs-12">
+	<input class="form-control testimonial" placeholder="provide links to previous jobs done if applicable">
+	<a href="#" class="duplicate-link margin-top-10">Add link</a>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-20"></div>
+
+{% for exp in service.links.all %}
+<div class="col-xs-12 col-sm-12 col-md-12">
+	<div class="work-experience-div link-form row" exp_id="{{ exp.id }}">
+		<label class="col-md-3 col-sm-3 col-xs-12">Link</label>
+		<div class="col-md-8 col-sm-6 col-xs-12">
+			<input type="text" name="" class="form-control link" placeholder="{{ exp.link }}">
+			<p class="error-message hidden invalid-link">Invalid Link: make sure to start link with http:// or https://</p>
+		</div>
+		<div class="col-sm-12 col-md-12 col-xs-12"></div>
+
+		<label class="col-md-3 col-sm-3 col-xs-12">Description (Optional)</label>
+		<div class="col-md-8 col-sm-6 col-xs-12 margin-bottom-small">
+			<textarea class="form-control description link-description" placeholder="{{ exp.link_info|default:'Brief description of the link content' }}"></textarea>
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12 job-seeker-content-spacing">
+			<a href='#' class='remove-exp pull-right'>Remove</a>
+		</div>
+	</div>	
+</div>
+{% endfor %}
+
+<div class="new-link margin-bottom-20"></div>
+
+<label class="col-md-4 col-sm-4 col-xs-12">How much do you charge for this service</label>
+<div class="col-md-8 col-sm-8 col-xs-12">
+	<input class="form-control price price-field" placeholder="Please be specific ex. 1000 shillings per hour">
+	<a href="#" class="add-price margin-top-10">Add another price</a>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-20"></div>
+
+{% for price in service.prices.all %}
+<div class="col-md-12 col-sm-12 col-xs-12">
+	<div class="work-experience-div price-form row" exp_id="{{ price.id }}">
+		<label class="col-md-3 col-sm-3 col-xs-12">Price</label>
+		<div class="col-md-8 col-sm-6 col-xs-12">
+			<input type="text" class="form-control price" placeholder="{{ price.name }}">
+		</div>
+		<div class="col-sm-12 col-md-12 col-xs-12"></div>
+		<div class="col-md-12 col-sm-12  col-xs-12 job-seeker-content-spacing">
+			<a href='#' class='remove-exp pull-right'>Remove</a>
+		</div>
+	</div>
+</div>
+{% endfor %}
+
+<div class="new-price margin-bottom-20"></div>
+
+<label class="col-md-4 col-sm-4 col-xs-12">Are your rates negotiable?</label>
+<div class="col-md-8 col-sm-8 col-xs-12">
+	<div class="btn-group select-rates" data-toggle="buttons">
+	  <label class="btn btn-primary">
+	    <input type="radio" name="rates" value="yes" autocomplete="off"> Yes
+	  </label>
+	  <label class="btn btn-primary">
+	    <input type="radio"  name="rates" value="no" autocomplete="off"> No
+	  </label>
+	</div>
+	<p class="error-message hidden select-rate">Please select one option before you continue.</p>
+</div>
+<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-20"></div>

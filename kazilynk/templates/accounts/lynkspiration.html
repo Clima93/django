@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block title %}KaziLynk | Lynkspiration{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script type="text/javascript" src="/static/js/lynkspiration-script.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12 col-sm-12 col-xs-12 margin-top-20">
+	<div class="col-md-12 col-sm-12 hidden-xs grey-bg-lynk"></div>
+	<div class="col-md-2 col-sm-2 hidden-xs visible-sm visible-md visible-lg lynk-section-left-div text-center">
+		{% if article.author %}
+			<p class="dark-grey">by</p>
+			<p class="dark-grey">{{ article.author }}</p>
+		{% endif %}
+		<i class="fa fa-facebook-official margin-bottom-10" aria-hidden="true"></i><br>
+		<i class="fa fa-twitter-square margin-bottom-10" aria-hidden="true"></i><br>
+		<a href="mailto:?subject={{ article.title }}&body=Just Read this awesome article and I thought I would share it with you! Check it out here: {{ request.META.HTTP_HOST }}{% url 'view_article' article.id %}"><i class="fa fa-envelope margin-bottom-10" aria-hidden="true"></i></a><br>
+		<a href="whatsapp://send?text={{ article.title }} {{ request.META.HTTP_HOST }}{% url 'view_article' article.id %}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp margin-bottom-10" aria-hidden="true"></i></a><br>
+	</div>
+	<div class="col-md-6 col-sm-8 col-xs-12 lynk-section">
+		<span class="hidden article-url">{{ article.url }}</span>
+		<h3 class="margin-bottom-20">{{ article.title }}</h3>
+		{% if article.sub_title %}
+		<h4>{{ article.sub_title }}</h4>
+		{% endif %}
+		{% if article.author %}
+		<div class="visible-xs hidden-sm hidden-md">
+			<span class="dark-grey">By {{ article.author }}</span>
+			<i class="fa fa-facebook-official pull-right" aria-hidden="true"></i>
+			<i class="fa fa-twitter-square pull-right" aria-hidden="true"></i>
+			<a href="mailto:?subject={{ article.title }}&body=Just Read this awesome article and I thought I would share it with you! Check it out here: {{ request.META.HTTP_HOST }}{% url 'view_article' article.id %}"><i class="fa fa-envelope pull-right" aria-hidden="true"></i></a>
+			<a href="whatsapp://send?text={{ article.title }} {{ request.META.HTTP_HOST }}{% url 'view_article' article.id %}" data-action="share/whatsapp/share"><i class="fa fa-whatsapp pull-right" aria-hidden="true"></a></i>
+		</div>
+		{% endif %}
+		{{ article.html|safe }}
+
+		<div class="row margin-top-20 margin-bottom-20 bottom-border padding-bottom-10">
+			<div class="col-md-6 col-sm-6 col-xs-6 no-padding-right">
+				<a href="{% url 'view_article' next_article.id %}"><img src="{{ next_article.get_thumbnail }}" class="img-responsive"></a>
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-6 lynk-next-article padding-bottom-20 padding-top-10">
+				<a href="{% url 'view_article' next_article.id %}"><p class="light-blue bold">READ THIS NEXT</p></a>
+				<h3 class="margin-bottom-20">{{ next_article.title }}</h3>
+				<a href="{% url 'view_article' next_article.id %}" class="btn btn-primary">Go Now</a>
+			</div>
+		</div>
+		<div class="row margin-top-20 margin-bottom-20 bottom-border padding-bottom-10">
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<h3 class="light-blue">Can we send you a helpful email?</h3>
+				<p>More articles like this one, job opportunities you'll actually like, and advice</p>
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-6 lynk-newsletter">
+				<input class="form-control email-field" placeholder="email@example.com">
+				<button class="btn btn-primary signup-newsletter margin-top-sm-10">GO</button>
+				<p class="hidden missing-email error-message">Please add email first</p>
+				<p class="hidden green complete"></p>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-2 col-sm-2 hidden-xs popular-section-lynk" style="margin-left: 70px;">
+		<h4 class=" text-center bottom-border padding-bottom-10">Most Popular</h4>
+
+		{% for p in popular %}
+			<span class="lynk-section-numbers dark-grey">{{ forloop.counter }}</span>
+			<a href="{% url 'view_article' p.id %}">{{ p.title }}</a>
+			<p class="bottom-border margin-top-10"></p>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

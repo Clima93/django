@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+ {% load humanize thumbnail %}
+
+{% block title %}KaziLynk Profile Page{% endblock %}
+
+{% block extra_head %}
+	<script type="text/javascript" src="/static/js/profile-script.js"></script>
+{% endblock %}
+
+
+{% block content %}
+	<div class="col-md-3 col-sm-2 col-xs-12 padding-top">
+		<!--
+		
+		-->
+		<div class="padding-left pos-absolute profile-sidenav">
+			<a href="/accounts/profile" class="btn btn-default profile-dashboard-btn{% ifequal request.path '/accounts/profile' %} profile-active{% endifequal %}">
+				<span class="pull-left">Profile Dashboard</span>
+				
+
+				<i class="fa fa-tachometer pull-right profile-dashboard-icons" aria-hidden="true"></i>
+			</a>
+			
+			<a href="/register/profile_home" class="btn btn-default profile-dashboard-btn{% ifequal request.path '/register/profile_home' %} profile-active{% endifequal %}">
+				<span class="pull-left">Personal Details</span>
+				<i class="fa fa-check pull-right profile-dashboard-icons green-tick {% if not profile.personal_details_complete %}hidden{% endif %}" aria-hidden="true"></i>
+			</a>
+
+			<a href="{% url 'job_criteria' %}" class="btn btn-default profile-dashboard-btn{% ifequal request.path '/register/job_criteria' %} profile-active{% endifequal %}">
+				<span class="pull-left">Job Criteria</span>
+				<i class="fa fa-check pull-right profile-dashboard-icons green-tick {% if not profile.job_criteria_complete %}hidden{% endif %}" aria-hidden="true"></i>
+			</a>
+
+			<a href="{% url 'work_experience' %}" class="btn btn-default profile-dashboard-btn{% ifequal request.path '/register/work_experience' %} profile-active{% endifequal %}">
+				<span class="pull-left">Work Experience</span>
+				<i class="fa fa-check pull-right profile-dashboard-icons green-tick {% if not profile.work_experience_complete %}hidden{% endif %}" aria-hidden="true"></i>
+			</a>
+
+			<a href="{% url 'education' %}" class="btn btn-default profile-dashboard-btn{% ifequal request.path '/register/education' %} profile-active{% endifequal %}">
+				<span class="pull-left">Education</span>
+				<i class="fa fa-check pull-right profile-dashboard-icons green-tick {% if not profile.education_complete %}hidden{% endif %}" aria-hidden="true"></i>
+				<i class="fa fa-times pull-right profile-dashboard-icons red-x {% if not profile.education_incomplete %}hidden{% endif %}" aria-hidden="true"></i>
+			</a>
+
+			<a href="{% url 'skills' %}" class="btn btn-default profile-dashboard-btn{% ifequal request.path '/register/skills' %} profile-active{% endifequal %}">
+				<span class="pull-left">Skills</span>
+				<i class="fa fa-check pull-right profile-dashboard-icons green-tick {% if not profile.skills_complete %}hidden{% endif %}" aria-hidden="true"></i>
+			</a>
+
+			<a href="{% url 'language' %}" class="btn btn-default profile-dashboard-btn{% ifequal request.path '/register/language' %} profile-active{% endifequal %}">
+				<span class="pull-left">Languages</span>
+				<i class="fa fa-check pull-right profile-dashboard-icons green-tick {% if not profile.language_complete %}hidden{% endif %}" aria-hidden="true"></i>
+				<i class="fa fa-times pull-right profile-dashboard-icons red-x {% if not profile.language_incomplete %}hidden{% endif %}" aria-hidden="true"></i>
+			</a>
+
+			<a href="{% url 'documents' %}" class="btn btn-default profile-dashboard-btn{% ifequal request.path '/register/documents' %} profile-active{% endifequal %}">
+				<span class="pull-left">My Documents</span>
+				<i class="fa fa-check pull-right profile-dashboard-icons green-tick {% if not profile.documents_complete %}hidden{% endif %}" aria-hidden="true"></i>
+			</a>
+
+			<a href="#" class="btn btn-default profile-dashboard-btn progress-btn">
+				<span class="pull-left">Progress</span>
+				<div class="progress progress-div">
+				  <div class="progress-bar {{ profile.complete_class }}" role="progressbar" aria-valuenow="{{ profile.complete }}"
+				  aria-valuemin="0" aria-valuemax="100" style="width:{{ profile.complete }}%">
+				    {{ profile.complete }}%
+				  </div>
+				</div>
+			</a>
+
+		</div>
+	</div>
+	<div class="col-md-8 col-sm-9 col-xs-12 register-div padding-bottom-default {{ special_css }} border-box {% block profile_css %}{% endblock %}">
+		<div class="arima label-bottom">
+			{% block content_box %}
+			<div class="col-md-12 col-sm-12 col-xs-12 grey-bg no-margin-round width-plus20px padding-top-10">
+				<h4 class="text-center bold">MY PROFILE DASHBOARD</h4>
+
+				<div class="col-md-4 col-sm-4 col-xs-12">
+					{% if profile.image %}
+					{% thumbnail profile.image "250x400" as im %}
+						<img src="{{ im.url }}" class="img-responsive margin-bottom-10 center">
+					{% endthumbnail %}
+					{% endif %}
+					<button class="btn btn-primary profile-photo margin-bottom-10">Change Profile Photo</button>
+					<form action="{% url 'profile_page' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+						<input type="file" class="prof-pic hidden" name="prof-pic">
+						<input type="submit" class="prof-submit hidden">
+					</form>
+
+					<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-top-20">
+						<a href="{% url 'profile_details' %}" class="dark-grey"><i class="fa fa-pencil profile-edit-icon" aria-hidden="true"></i></a>
+						<h4 class="text-center">PERSONAL DETAILS</h4>
+						<p><span class="bold">Name: </span>{{ profile.first_name }} {{ profile.last_name }}</p>
+						<p><span class="bold">Email: </span>{{ profile.user.email }}</p>
+						<p><span class="bold">Phone: </span>{{ profile.phone }}</p>
+						<p><span class="bold">Residence: </span>{{ country_name }}</p>
+						<p><span class="bold">Links: </span></p>
+						<ul>
+							{% for link in profile.links.all %}
+							{% if link.active %}
+								<li><a href="{{ link.link }}" target="_blank">{{ link.link|truncatechars:"30" }}</a></li>
+							{% endif %}
+							{%endfor %}
+						</ul>
+					</div>
+
+					<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-top-20 margin-bottom-20">
+						<h4 class="text-center">SKILLS RATING</h4>
+						<p>Under development</p>
+					</div>
+
+				</div>
+				<div class="col-md-8 col-sm-8 col-xs-12">
+					<div class="col-md-12 col-sm-12 col-xs-12 white-bg">
+						<a href="{% url 'job_criteria' %}" class="dark-grey"><i class="fa fa-pencil profile-edit-icon" aria-hidden="true"></i></a>
+						<h4 class="text-center">PERSONAL STATEMENT</h4>
+						{{ profile.personal_statement_text|safe }}
+					</div>
+
+					<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-top-20">
+						<a href="{% url 'job_criteria' %}" class="dark-grey"><i class="fa fa-pencil profile-edit-icon" aria-hidden="true"></i></a>
+						<h4 class="text-center">JOB CRITERIA</h4>
+						<p><span class="bold">Preffered company size: </span>{{ profile.company_size }}</p>
+						<p><span class="bold">Preferred work location: </span>{{ profile.work_location }}</p>
+						<p><span class="bold">Job Level: </span>{{ profile.job_level }}</p>
+						<p><span class="bold">Available from: </span>{{ profile.availability }}</p>
+						<p><span class="bold">Salary Range: </span>{{ profile.salary_currency }} {{ profile.min_salary|intcomma }} - {{ profile.max_salary|intcomma }}</p>
+					</div>
+
+					<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-top-20">
+						<a href="{% url 'education' %}" class="dark-grey"><i class="fa fa-pencil profile-edit-icon" aria-hidden="true"></i></a>
+						<h4 class="text-center">EDUCATION</h4>
+						{% for edu in profile.education.all %}
+						{% if edu.active %}
+							<p>{{ edu.institute }}</p>
+						{% endif %}
+						{% endfor %}
+					</div>
+
+					<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-top-20">
+						<a href="{% url 'skills' %}" class="dark-grey"><i class="fa fa-pencil profile-edit-icon" aria-hidden="true"></i></a>
+						<h4 class="text-center">SKILLS</h4>
+						<h4>Hard skills</h4>
+						<ul>
+							{% for skill in profile.hard_skills.all %}
+							<li>{{ skill.name }}</li>
+							{% endfor %}
+						</ul>
+
+						<h4>Soft skills</h4>
+						<ul>
+							{% for skill in profile.skills.all %}
+							<li>{{ skill.name }}</li>
+							{% endfor %}
+						</ul>
+					</div>
+
+					<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-top-20">
+						<a href="{% url 'language' %}" class="dark-grey"><i class="fa fa-pencil profile-edit-icon" aria-hidden="true"></i></a>
+						<h4 class="text-center">LANGUAGES</h4>
+						{% for lan in profile.languages.all %}
+							{% if lan.active %}
+								<p><span class="bold">{{ lan.language }}: </span> Reading: <span class="light-blue">{{ lan.reading_level }}</span> Writing: <span class="light-blue">{{ lan.writing_level }}</span> Verbal: <span class="light-blue">{{ lan.verbal_level }}</span></p>
+							{% endif %}
+						{% endfor %}
+					</div>
+
+					<div class="col-md-12 col-sm-12 col-xs-12 margin-top-20 margin-bottom-20 text-center">
+					{% if profile.document %}
+						<a href="{{ profile.document.url }}" class="btn btn-success">Download CV</a>
+					{% endif %}
+					</div>
+					
+				</div>
+			</div>
+			{% endblock %}
+		</div>
+	</div>
+{% endblock %} 

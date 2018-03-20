@@ -1,0 +1,83 @@
+{% load thumbnail %}
+
+<div class="col-md-1 col-sm-1 hidden-xs"></div>
+<div class="col-md-9 col-sm-9 col-xs-12 padding-top-10 margin-top-20 margin-bottom-20">
+	<div class="col-md-12 col-sm-12 col-xs-12 grey-bg no-margin-round width-plus20px padding-top-10">
+		<h4 class="text-center bold">MY PROFILE DASHBOARD</h4>
+
+		<div class="col-md-4 col-sm-4 col-xs-12">
+			{% if user_profile.image %}
+			{% thumbnail user_profile.image "250x400" as im %}
+				<img src="{{ im.url }}" class="img-responsive margin-bottom-10 center">
+			{% endthumbnail %}
+			{% endif %}
+
+			<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-top-20 margin-bottom-20">
+				<h4 class="text-center">PERSONAL DETAILS</h4>
+				<p><span class="bold">Name: </span>{{ user_profile.first_name }} {{ user_profile.last_name }}</p>
+				<p><span class="bold">Email: </span>{{ user_profile.user.email }}</p>
+				<p><span class="bold">Phone: </span>{{ user_profile.phone }}</p>
+			</div>
+
+		</div>
+
+		<div class="col-md-8 col-sm-8 col-xs-12">
+			<h4 class="text-center">Services</h4>
+
+			{% for service in user_profile.services.all %}
+				{% if service.active %}
+				<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-bottom-20 padding-top-10">
+					<a href="{% url 'view_service' service.id %}" class="dark-grey"><i class="fa fa-pencil profile-edit-icon" aria-hidden="true"></i></a>
+					<p><span class="bold">Service Name: </span> <a href="{% url 'view_service' service.id %}">{{ service.service.name|safe }}</a></p>
+					<p><span class="bold">Company Name: </span> {{ service.company_name }}</p>
+					<p><span class="bold">Email: </span> {{ service.email }}</p>
+					<p><span class="bold">Phone No: </span> {{ service.phone }}</p>
+
+					{% if service.company_website %}
+					<p><span class="bold">Company Website: </span> {{ service.company_website }}</p>
+					{% endif %}
+
+					<p><span class="bold">Business Details: </span></p>
+					{{ service.business_details_text|safe }}
+
+					{% if service.testimonial %}
+					<p><span class="bold margin-bottom-20">Testimonial: </span> {{ service.testimonial }}</p>
+					{% endif %}
+
+					{% if service.links.all %}
+						<p class="bold">Links</p>
+						<ul>
+						{% for link in service.links.all %}
+							<li><a href="{{ link.link }}">{{ link.link }}</a></li>
+						{% endfor %}
+						</ul>
+						
+					{% endif %}
+					
+					{% if service.location %}
+					<p><span class="bold">Location: </span> {{ service.location }}</p>
+					{% endif %}
+
+					<p><span class="bold">Price: </span> {{ service.price }}</p>
+					{% if service.prices.all %}
+						<p class="bold">Other Prices</p>
+						<ul>
+						{% for price in service.prices.all %}
+							<li>{{ price.name }}</li>
+						{% endfor %}
+						</ul>
+						
+					{% endif %}
+					<p><span class="bold">Price Negotiable: </span> {{ service.negotiable_text }}</p>
+
+					{% if service.uploads.all %}
+					<p><span class="bold">Number of Attachments: </span>{{ service.uploads.all|length }}</p>
+					{% endif %}
+				</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+</div>
+
+	

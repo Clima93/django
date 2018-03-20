@@ -1,0 +1,69 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block head_title %}KaziLynk Login Page{% endblock %}
+
+{% block content %}
+  <div class="login-main-div col-md-12 col-sm-12">
+    <div class="col-lg-3 col-md-2 col-sm-2 hidden-xs"></div>
+    <div class="col-lg-6 col-md-8 col-sm-8 col-xs-12 register-div login-div quicksand">
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <h3 class="quicksand">Login into Your Account</h3>
+        <form class="login" method="POST" action="{% url 'account_login' %}">
+          {% csrf_token %}
+          
+          {% comment %}
+            {{ form.as_p }}
+          {% endcomment %}
+          
+          <p>
+            <label for="id_login" class="login-email-label">E-mail:</label>
+            <input autofocus="autofocus" id="id_login" name="login" placeholder="E-mail address" type="email">
+          </p>
+          <p>
+            <label for="id_password">Password:</label>
+            <input id="id_password" name="password" placeholder="Password" type="password">
+          </p>
+          <button class="primaryAction login-signin-button" type="submit">{% trans "Sign In" %}</button>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 zero-padding-left">
+            <p>
+              <label for="id_remember">Remember Me:</label>
+              <input id="id_remember" name="remember" type="checkbox">
+            </p>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <a class="button secondaryAction quicksand" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+          </div>
+            
+          {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+          {% endif %}
+          
+          <div class="error-message form-error">{{ form.non_field_errors }}</div>
+        </form>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="col-lg-1 col-md-1 hidden-sm hidden-xs login-or">
+          <div class="grey-hor-line margin-top-62"></div>
+          or
+          <div class="grey-hor-line"></div>
+        </div>
+        <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12 zero-padding-left">
+          <div class="socialaccount_ballot">
+            <h5 class="quicksand dark-blue">Don't have an account? <a href="/register">Sign Up</a>!</h5>
+            <ul class="socialaccount_providers login-social quicksand">
+              <a class="btn btn-default google-bg-light" href="/accounts/google/login/?process=login" role="button"><i class="text-center fa fa-google google-bg icon-spacing block-icon" aria-hidden="true"></i>Sign in with Google</a>
+              <a class="btn btn-default facebook-bg-light" href="/accounts/facebook/login/?process=login" role="button"><i class="text-center block-icon fa fa-facebook facebook-bg icon-spacing" aria-hidden="true"></i>Sign in with Facebook</a>
+              <a class="btn btn-default twitter-bg-light" href="/accounts/twitter/login/?process=login" role="button"><i class="text-center block-icon fa fa-twitter twitter-bg icon-spacing" aria-hidden="true"></i>Sign in with Twitter</a>
+              <a class="btn btn-default linkedin-bg-light" href="/accounts/linkedin_oauth2/login/?process=login" role="button"><i class="text-center block-icon fa fa-linkedin linkedin-bg icon-spacing" aria-hidden="true"></i></i>Sign in with Linkedin</a>
+            </ul>
+
+          </div>
+        </div> 
+      </div>
+    </div>
+    <div class="col-lg-2 col-md-3 col-sm-2 hidden-xs"></div>
+  </div>
+{% endblock %}

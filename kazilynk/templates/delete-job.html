@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block title %}{{ job.job_title|default:"Access Denied" }}{% endblock %}
+
+{% block extra_js %}
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="/static/js/delete-job-script.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-1 col-sm-1 hidden-xs"></div>
+<div class="col-md-10 col-sm-10 col-xs-12 margin-top-20 padding-sides margin-bottom-20">
+	{% if job %}
+		<h3>Delete Job Post</h3>
+		<p>Note that this action is irreversible; click the button below to confirm you want to delete the job post</p>
+		<button class="btn orange-btn delete" exp="{{ job.id }}">Delete Post</button>
+		<p class="error-message hidden"></p>
+	{% else %}
+		<p>You don't have the proper rights to delete this job post or it has already been deleted. If you feel this is an error you can contact <a href="mailto:support@kazilynk.com">support@kazilynk.com</a> for assistance.</p>
+	{% endif %}
+</div>
+{% endblock %}

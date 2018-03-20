@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}KaziLynk Demote Work Industry{% endblock %}
+
+
+{% block content %}
+	<div class="col-md-3 col-sm-2 hidden-xs "></div>
+	<div class="col-md-6 col-sm-8 col-xs-12 register-div padding-bottom-default border-box">
+		<div class="arima label-bottom">
+			{% if complete %}
+				<p>Demote Completed. The Industry has been marked as inactive. If you want to activate it use the link sent in the email or from the admin.</p>
+			{% endif %}
+
+			{% if error_message %}
+				<p class="error-message">{{ error_message }}</p>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %} 

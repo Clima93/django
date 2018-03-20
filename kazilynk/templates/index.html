@@ -1,0 +1,68 @@
+{% extends 'base_r.html' %}
+{% block title %}KaziLynk | Home {% endblock %}
+{% load staticfiles %}
+
+{% block content %}
+    <div id="promo" style="height:800px;">
+        <div class="jumbotron" style="background-color:rgba(0,14,89,0.8);padding:5px;"><h1 id="pull-left">Find A <strong>Job</strong></h1>
+            <div class="section group"><div class="col span_1_of_4">
+<select style="width:100%">
+    <optgroup label="Select Industry" >
+        <option value="" disabled selected>Select Industry</option>
+        <option value="">Service</option>
+        <option value="">Job</option>
+        <option value="">Candidate by skill/name</option>
+    </optgroup>
+    </select>
+</div><div class="col span_1_of_2">
+<input class="redifined_2" placeholder="Type Keyword e.g Sales" type="text" style="width:100%"/>
+</div><div class="col span_1_of_4">
+<button class="btn btn-primary" type="button" id="" style="width: 100%"><span style="font-size: 1.5em; "> <i class="fa fa-search" style= "margin-right: 10px"></i>SEARCH</span></button>
+</div></div>
+        </div><div class="strip" >
+    <div class="container" style="">
+        <div class="row">
+            <div class="col-md-4">                          
+                <span style="font-size: 3em">100+</span><br/><span style="font-size: 1.5em">OPPORTUNITIES</span></div>
+            <div class="col-md-4">
+                <span style="font-size: 3em">3000+</span><br /><span style="font-size: 1.5em">RESUMES</span></div>
+            <div class="col-md-4">
+                <span style="font-size: 3em">400+</span><br /><span style="font-size: 1.5em">SERVICE</span></div>
+        </div>
+    </div>
+</div></div>
+    <div id="feed">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h1>TOP JOBS</h1>
+                    <p><strong>Sales and Marketing Manager</strong><br><br> Nairobi, Kenya<br> Full time</p>
+                </div>
+                <div class="col-md-4">
+                    <h1>NEWEST JOBS</h1>
+                    <p><strong>Sales and Marketing Manager</strong><br><br> Nairobi, Kenya<br> Full time</p>
+                </div>
+                <div class="col-md-4">
+                    <h1>NEWEST SERVICES</h1>
+                    <p><strong>Sales and Marketing Manager</strong><br><br> Nairobi, Kenya<br> Full time</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-dark" style="height:250px;padding:10px;">
+        <p>Abouts Us | Contact us | Terms and Conditions | Privacy Policy | Pricing Policy</p>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-youtube"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a>
+                        <p class="copyright"
+                            style="padding:0;"><br> © Copyright 2018 All Rights Reserved | Powered by KaziLynk Limited<br><br> Incase of issues you can contact <a href="maito:support@kazilynk.com">support@kazilynk.com</a><br></p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    
+</body>
+</html>
+{% endblock %}

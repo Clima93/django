@@ -1,0 +1,91 @@
+{% extends 'base_2.html' %}
+{% block title %}KaziLynk{% endblock %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md">
+        <div class="container-fluid"><a class="navbar-brand" href="#">Kazi Lynk</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse"
+                id="navcol-1">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Post &nbsp;A Job</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Post your CV</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Find a Service</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">Log Out</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="banner">
+        <div class="jumbotron" style="height:300px;"></div>
+    </div>
+    <div id="margin"></div>
+    <div class="align-content-center">
+        <div class="container justify-content-center" id="register_con">
+            <div class="row">
+                <div class="col-md-6"><div id="align_left">
+<h1>ALREADY HAVE AN ACCOUNT? LOGIN</h1>
+</div><div class="column_color">
+    <form method="post">
+<strong>OR</strong>
+        <p>REGISTER AS A JOB SEEKER FOR FREE</p>
+        <p>Get matched with the job that callsfor your talents<br />qualifications</p>
+        <div class="form-group"><input type="input" name="full_name" placeholder="Full Name*" class="form-control" /></div>
+        <div class="form-group"><input type="email" name="email" placeholder="Email*" class="form-control" /></div>
+        <div class="form-group"><input type="password" name="password" placeholder="Password*" class="form-control" /></div>
+        <div class="form-group"><input type="password" name="password-repeat" placeholder="Confirm Password" class="form-control" /></div>
+        <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Sign Up</button><a href="#" class="">You already have an account? Login here.</a></div>
+    </form></div>
+    <div class="terms">By registering you agree to Kazilynk&#39;s terms of Service and Privacy Policy. You also agree to receive subsequent emails form Kazilynk which you may opt out of at any time</div>
+</div>
+                <div class="col-md-6" id="align_left">
+                    <h1>REGISTER AS A JOB SEEKER FOR FREE</h1><div class="column_color">
+<p ><strong>We don&#39;t waste your time or give false hope</strong><br>On Kazilynk, you don&#39;t apply for jobs you stand no chance of getting; neither do you send your CV into void in the hope that it will catch someone&#39;s attention. Once your profile is on our database, you just sit back and let our technology do the match making.<br/>----<br/></p>
+We give you a fair chance long <br /> as your profile is in our database, you will ALWAYS be considered for available opportunities, if you are the right candidate for the opportunity, you will get a fair chance of getting the job you deserve, if you aren&#39;t the right fit, don&#39;t lose hope, the right opportunity will eventually come your way.<br />----<br /><b>You get what you ask for</b>A
+detailed, updated profile that honestly and accurately represents who you are will guarantee tha you will only be connected with jobs that are a good fit for you. You end up doing what you WANT to do as opposed to doing what you HAVE
+to do.<br />
+</div></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-dark">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>Services</h3>
+                        <ul>
+                            <li><a href="#">Web design</a></li>
+                            <li><a href="#">Development</a></li>
+                            <li><a href="#">Hosting</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-md-3 item">
+                        <h3>About</h3>
+                        <ul>
+                            <li><a href="#">Company</a></li>
+                            <li><a href="#">Team</a></li>
+                            <li><a href="#">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6 item text">
+                        <h3>Company Name</h3>
+                        <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
+                    </div>
+                    <div class="col item social"><a href="#"><i class="icon ion-social-facebook"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-instagram"></i></a></div>
+                </div>
+                <p class="copyright">© Copyright 2018 All Rights Reserved | Powered by KaziLynk Limited<br><br>Incae of issues you can contact&nbsp;<a href="maito:support@kazilynk.com">support@kazilynk.com</a></p>
+            </div>
+        </footer>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

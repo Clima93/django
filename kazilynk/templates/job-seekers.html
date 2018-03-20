@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}KaziLynk Employers{% endblock %}
+
+{% block content %}
+<div id="employ-top-section" class="row">
+	<div id="employ-top-absolute">
+		<div id="description-box" class="col-md-4 col-sm-9 col-xs-10 hidden-xs">
+			<p class="text-left employ-top-description">You deserve to get the job that you will enjoy or are at the very least, suited for. Create your FREE KaziLynk profile and leave the rest to us.</p>
+		</div>
+		<div id="employ-top-link" class="col-md-12 col-sm-12 col-xs-12 hidden-xs">
+			<p id="employ-button" class="text-center"><a class="btn btn-default" href="{% url 'register' %}" role="button">Create your FREE KaziLynk Profile</a></p>
+		</div>
+	</div>
+	<img src="/static/img/demo_background/bg_4_small.jpg" alt="employ-top-image">
+</div>
+
+<div id="employ-low-section" class="row">
+	<div class="col-xs-12 col-md-12 col-sm-12">
+		<h2 class="hidden-xs">Never again will your CV get lost in the pile...</h2>
+		<h3 class="visible-xs">Never again will your CV get lost in the pile...</h3>
+		<p>When an employer searches for a candidate, your profile will be assigned a match rating depending on the employer's requirements. The higher your match rating, the higher your chances of getting your dream job.</p>
+		<p>The following aspects of your profile will contribute to your match rating.</p>
+	</div>
+	<div class="col-md-6 col-sm-6 col-xs-12">
+		<ul>
+			<li>Education and training</li>
+			<li>Skills</li>
+			<li>Availability</li>
+			<li>Experience</li>
+			<li>Qualifications</li>
+			<li>Languages</li>
+			<li>Key achievements</li>
+			<li>Desired remunerations</li>
+		</ul>
+		<div id="additional-info">
+			<p>*To maximise your chances of getting spotted,</p>
+			<p>Be sure to submit as much information about yourself as possible.</p>
+		</div>
+	</div>
+
+	<div id="employ-left-section" class="col-md-6 col-sm-6 col-xs-12">
+		<div class="content-box">
+			<p>Contact details that you submit through KaziLynk are confidential and cannot be viewed by anyone except potential employers and ONLY after they have shortlisted you for an interview.</p>
+		</div>
+		<img class="img-responsive" src="/static/img/laptop.png" src="Laptop">
+	</div>
+	<div id="employ-bottom-button" class="col-sm-12 col-md-12 col-xs-12">
+		<p class="text-center"><a class="btn btn-default" href="{% url 'register' %}" role="button">GET STARTED</a></p>
+	</div>
+</div>
+
+{% endblock %}

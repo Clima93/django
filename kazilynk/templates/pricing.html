@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}KaziLynk Pricing Policy{% endblock %}
+
+{% block content %}
+<div class="row pricing-div padding-sides">
+	<div class="col-md-12 col-sm-12 col-xs-12 text-center margin-top-20">
+		<h2 class="margin-bottom-20 bold">OUR PRICING IS...</h2>
+		<h4 class="margin-bottom-20">Flexible and fair</h4>
+		<h4 class="margin-bottom-20">Unambiguous – there are no hidden costs</h4>
+		<h4 class="margin-bottom-20">Free until your needs are met</h4>
+	</div>
+	
+	<div class="hidden-xs col-md-1 col-sm-1"></div>
+	<div class="col-md-11 col-sm-11 col-xs-12 margin-bottom-20">
+		<div class="col-md-3 col-sm-3 col-xs-12 text-center padding-bottom-20 white-bg margin-right-40 margin-bottom-20">
+			<h3>PAY PER HIRE</h3>
+			<h4 class="margin-bottom-20 font-9em">(FOR THE EMPLOYER)</h4>
+
+			<p>I am an employer and I need to</p>
+			<p class="error-message margin-bottom-20">HIRE ONE PERSON</p>
+			<p class="margin-bottom-20">Pay 10% of your hire's first year base salary with a 60 day guarantee.</p>
+			<a href="{% url 'check_post_job' %}" class="btn orange-btn">GET STARTED</a>
+		</div>
+
+		<div class="col-md-3 col-sm-3 col-xs-12 text-center padding-bottom-20 white-bg margin-right-40 margin-bottom-20">
+			<h3>UNLIMITED HIRES</h3>
+			<h4 class="margin-bottom-20 font-9em">(FOR THE EMPLOYER)</h4>
+
+			<p>I am an employer and need to</p>
+			<p class="error-message margin-bottom-20">HIRE MULTIPLE PEOPLE</p>
+
+			<p class="margin-bottom-20">Pay one set cost per month and hire as many people as you need.</p>
+			<a href="{% url 'check_post_job' %}" class="btn orange-btn">GET STARTED</a>
+
+		</div>
+
+		<div class="col-md-3 col-sm-3 col-xs-12 text-center padding-bottom-20 white-bg margin-right-40 margin-bottom-20">
+			<h3>PAY PER CUSTOMER</h3>
+			<h4 class="margin-bottom-20 font-9em">(FOR THE SERVICE PROVIDER)</h4>
+
+			<p>I am a service provider and need to</p>
+			<p class="error-message margin-bottom-20">GET CUSTOMERS</p>
+
+			<p class="margin-bottom-20">Pay 10% commission on every client you clinch through Kazilynk</p>
+			<a href="{% url 'check_post_service' %}" class="btn orange-btn">GET STARTED</a>
+		</div>
+
+	</div>
+	<div class="col-md-12 col-sm-12 col-xs-12 text-center margin-bottom-20">
+		<h3 class="margin-bottom-20">Have questions?</h3>
+		<h3 class="margin-bottom-20">Call us on +254 700-858298 or email <a href="mailto:info@kazilynk.com">info@kazilynk.com</a></h3>
+	</div>
+		
+</div>
+{% endblock %}

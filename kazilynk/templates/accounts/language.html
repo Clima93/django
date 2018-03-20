@@ -1,0 +1,212 @@
+{% extends 'accounts/profile.html' %}
+
+{% block title %}KaziLynk Languages{% endblock %}
+
+{% block extra_css %}
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+{% endblock %}
+
+{% block extra_js %}
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="/static/js/language-script.js?v=1.0"></script>
+{% endblock %}
+
+{% block content_box %}
+<div class="col-md-12 col-sm-12 col-xs-12 quicksand">
+	<h3 class="bottom-border padding-bottom-10 margin-bottom-20">Languages</h3>
+
+	{% if profile.language_incomplete %}
+		<p class="error-message">Please Fill All Fields</p>
+	{% endif %}
+
+	{% for exp in language_exp %}
+		<div class="work-experience-div col-md-12 col-sm-12 co-xs-12 col-lg-12" exp_id="{{ exp.id }}">
+			<label class="col-md-3 col-sm-3">Language {{ forloop.counter }}</label>
+			<div class="col-md-8 col-sm-6">
+				<select class="selectpicker language" title="{{ exp.language|default:'Select a language' }}">
+					<option></option>
+					<option>English</option>
+					<option>Swahili</option>
+					<option>Māori</option>
+					<option>Afrikaans</option>
+					<option>Arabic</option>
+					<option>Bahasa Indonesian</option>
+					<option>Chinese - Cantonese</option>
+					<option>Chinese - Mandarin</option>
+					<option>Cook Islands Maori</option>
+					<option>Dutch</option>
+					<option>French</option>
+					<option>German</option>
+					<option>Greek</option>
+					<option>Hindi</option>
+					<option>Italian</option>
+					<option>Japanese</option>
+					<option>Korean</option>
+					<option>Malaysian</option>
+					<option>Portuguese</option>
+					<option>Russian</option>
+					<option>Samoan</option>
+					<option>Spanish</option>
+					<option>Thai</option>
+					<option>Tongan</option>
+					<option>Vietnamese</option>
+					<option value="other">Other</option>
+				</select>
+				<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+				<input type="text" name="" class="form-control job-seeker-content-spacing hidden new-language" placeholder="Please Specify">
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+			<label class="col-md-3 col-sm-3">Reading Level</label>
+			<div class="col-md-8 col-sm-6">
+				<select class="selectpicker reading-level" title="{{ exp.reading_level|default:'Select One' }}">
+					<option></option>
+					<option>Fluent</option>
+					<option>Advanced</option>
+					<option>Fair</option>
+					<option>Minimal</option>
+					<option>None</option>
+				</select>
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+			<label class="col-md-3 col-sm-3">Writing Level</label>
+			<div class="col-md-8 col-sm-6">
+				<select class="selectpicker writing-level" title="{{ exp.writing_level|default:'Select One' }}">
+					<option></option>
+					<option>Fluent</option>
+					<option>Advanced</option>
+					<option>Fair</option>
+					<option>Minimal</option>
+					<option>None</option>
+				</select>
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+			<label class="col-md-3 col-sm-3">Verbal Level</label>
+			<div class="col-md-8 col-sm-6">
+				<select class="selectpicker verbal-level" title="{{ exp.verbal_level|default:'Select One' }}">
+					<option></option>
+					<option>Fluent</option>
+					<option>Advanced</option>
+					<option>Fair</option>
+					<option>Minimal</option>
+					<option>None</option>
+				</select>
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing">
+				<a href='#' class='remove-exp pull-right'>Remove</a>
+			</div>
+
+		</div>
+	{% endfor %}
+
+	{% if not language_exp %}
+		<div class="work-experience-div col-md-12 col-sm-12 co-xs-12 col-lg-12" exp_id="">
+			<label class="col-md-3 col-sm-3">Language</label>
+			<div class="col-md-8 col-sm-6">
+				<select class="selectpicker language" title="Select a language">
+					<option></option>
+					<option>English</option>
+					<option>Swahili</option>
+					<option>Māori</option>
+					<option>Afrikaans</option>
+					<option>Arabic</option>
+					<option>Bahasa Indonesian</option>
+					<option>Chinese - Cantonese</option>
+					<option>Chinese - Mandarin</option>
+					<option>Cook Islands Maori</option>
+					<option>Dutch</option>
+					<option>French</option>
+					<option>German</option>
+					<option>Greek</option>
+					<option>Hindi</option>
+					<option>Italian</option>
+					<option>Japanese</option>
+					<option>Korean</option>
+					<option>Malaysian</option>
+					<option>Portuguese</option>
+					<option>Russian</option>
+					<option>Samoan</option>
+					<option>Spanish</option>
+					<option>Thai</option>
+					<option>Tongan</option>
+					<option>Vietnamese</option>
+					<option value="new">Other</option>
+				</select>
+				<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+				<input type="text" name="" class="form-control job-seeker-content-spacing hidden new-language" placeholder="Please Specify">
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+			<label class="col-md-3 col-sm-3">Reading Level</label>
+			<div class="col-md-8 col-sm-6">
+				<select class="selectpicker reading-level" title="Select One">
+					<option></option>
+					<option>Fluent</option>
+					<option>Advanced</option>
+					<option>Fair</option>
+					<option>Minimal</option>
+					<option>None</option>
+				</select>
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+			<label class="col-md-3 col-sm-3">Writing Level</label>
+			<div class="col-md-8 col-sm-6">
+				<select class="selectpicker writing-level" title="Select One">
+					<option></option>
+					<option>Fluent</option>
+					<option>Advanced</option>
+					<option>Fair</option>
+					<option>Minimal</option>
+					<option>None</option>
+				</select>
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+			<label class="col-md-3 col-sm-3">Verbal Level</label>
+			<div class="col-md-8 col-sm-6">
+				<select class="selectpicker verbal-level" title="Select One">
+					<option></option>
+					<option>Fluent</option>
+					<option>Advanced</option>
+					<option>Fair</option>
+					<option>Minimal</option>
+					<option>None</option>
+				</select>
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+		</div>
+	{% endif %}
+
+	<div class="new-lang"></div>
+
+	<div class="col-sm-12 col-md-12"><a href="#" class="duplicate">Add another</a></div>
+
+
+	<div class="col-md-12 col-sm-12 text-center profile-btns-div">
+		{% if prev %}<a href="{{ prev }}" class="btn btn-default profile-update-btns"><< Prev</a>{% endif %}
+		<a class="btn btn-primary update" href="#">Update</a>
+		{% if next %}<a href="{{ next }}" class="btn btn-default update profile-update-btns" state="next">Next >></a>{% endif %}
+	</div>
+
+	<div class="col-sm-12 col-md-12">
+		<div class="col-md-12 text-center">
+			<i class="fa fa-circle-o-notch fa-spin loading hidden" aria-hidden="true"></i>
+		</div>
+		<p class="hidden error-message small-padding-left response-error">Sorry there seems to be an issue connecting to the server. Please try again later.</p>
+		<p class="hidden error-message small-padding-left response-message"></p>
+    	<p class="server-error-message hidden error-message"></p>
+    	<p class="complete-message hidden soft-green">Update Complete</p>
+	</div>
+
+
+
+
+</div>
+{% endblock %}

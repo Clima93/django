@@ -1,0 +1,102 @@
+{% extends 'accounts/profile.html' %}
+
+{% block title %}KaziLynk Work Experience{% endblock %}
+
+{% block extra_css %}
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.min.css">
+{% endblock %}
+
+{% block extra_js %}
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="/static/js/work-experience-script.js?v=1.0"></script>
+{% endblock %}
+
+{% block content_box %}
+<div class="quicksand col-md-12 col-sm-12 col-xs-12">
+	<h3 class="bottom-border padding-bottom-10 margin-bottom-20">Work Experience</h3>
+
+	{% for exp in work_exps %}
+		<div class="work-experience-div col-md-12 col-sm-12" exp_id="{{ exp.id }}">
+			<label class="col-md-3 col-sm-3 font-normal">Company Name: </label>
+			<div class="col-md-6 col-sm-6">
+				<input type="text" name="" class="form-control company-name" placeholder="{{ exp.company_name|default:'Blank' }}">
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+			<label class="col-md-3 col-sm-3 font-normal">Job Title: </label>
+			<div class="col-md-6 col-sm-6">
+				<input type="text" name="" class="form-control job-title" placeholder="{{ exp.job_title|default:'Blank' }}">
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>	
+
+			<label class="col-md-3 col-sm-3 font-normal">Responsibilities: </label>
+			<div class="col-md-6 col-sm-6">
+				<textarea class="form-control responsibility textarea-height">{{ exp.responsibility|default:'' }}</textarea>
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>	
+
+			<label class="col-md-3 col-sm-3 font-normal">Key Achievements: </label>
+			<div class="col-md-6 col-sm-6">
+				<textarea class="form-control achievements textarea-height">{{ exp.achievements|default:'' }}</textarea>
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing">
+				<a href='#' class='remove-exp pull-right'>Remove</a>
+			</div>
+
+		</div>
+	{% endfor %}
+
+	{% if not work_exps %}
+		<div class="work-experience-div col-md-12 col-sm-12" exp_id="">
+			<label class="col-md-3 col-sm-3 font-normal">Company Name: </label>
+			<div class="col-md-6 col-sm-6">
+				<input type="text" name="" class="form-control company-name" placeholder="">
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+			<label class="col-md-3 col-sm-3 font-normal">Job Title: </label>
+			<div class="col-md-6 col-sm-6">
+				<input type="text" name="" class="form-control job-title" placeholder="">
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>	
+
+			<label class="col-md-3 col-sm-3 font-normal">Responsibilities: </label>
+			<div class="col-md-6 col-sm-6">
+				<textarea class="form-control responsibility textarea-height"></textarea>
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>	
+
+			<label class="col-md-3 col-sm-3 font-normal">Key Achievements: </label>
+			<div class="col-md-6 col-sm-6">
+				<textarea class="form-control achievements textarea-height"></textarea>
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+		</div>
+	{% endif %}
+
+	<div class="new-exp"></div>
+
+	<div class="col-sm-12 col-md-12"><a href="#" class="duplicate">Add a Job</a></div>
+
+	<div class="col-md-12 col-sm-12 text-center profile-btns-div">
+		{% if prev %}<a href="{{ prev }}" class="btn btn-default profile-update-btns"><< Prev</a>{% endif %}
+		<a class="btn btn-primary update" href="#">Update</a>
+		{% if next %}<a href="{{ next }}" class="btn btn-default update profile-update-btns" state="next">Next >></a>{% endif %}
+	</div>
+
+	<div class="col-sm-12 col-md-12">
+		<div class="col-md-12 text-center">
+			<i class="fa fa-circle-o-notch fa-spin loading hidden" aria-hidden="true"></i>
+		</div>
+		<p class="hidden error-message small-padding-left response-error">Sorry there seems to be an issue connecting to the server. Please try again later.</p>
+    	<p class="server-error-message hidden error-message"></p>
+    	<p class="complete-message hidden soft-green">Update Complete</p>
+	</div>
+</div>
+{% endblock %}

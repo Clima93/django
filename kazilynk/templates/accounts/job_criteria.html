@@ -1,0 +1,146 @@
+{% extends 'accounts/profile.html' %}
+
+{% block title %}KaziLynk Job Criteria{% endblock %}
+
+{% block extra_css %}
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.min.css">
+	<link rel="stylesheet" href="/static/css/chosen.css">
+{% endblock %}
+
+{% block extra_js %}
+	<script type="text/javascript">
+		window.industry_list = {{ industry_list|safe }};
+	</script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="/static/js/chosen.jquery.js"></script>
+	<script type="text/javascript" src="/static/js/job-criteria-script.js?v=1.1"></script>
+{% endblock %}
+
+{% block content_box %}
+<div class="col-md-12 col-sm-12 col-xs-12 quicksand">
+	<h3 class="bottom-border padding-bottom-10 margin-bottom-20">Job Criteria</h3>
+
+	<label class="col-md-3 col-sm-3">Personal Statement: *</label>
+	<div class="col-md-6 col-sm-6">
+		<textarea class="form-control j-c-personal-statement-textarea" placeholder="Recommended: 50-200 words">{{ profile.personal_statement|default:'' }}</textarea>
+		<p class="error-message hidden personal-error">Please Include Personal Statement</p>
+	</div>
+	<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+	<label class="col-md-3 col-sm-3">Preferred company size: *</label>
+	<div class="col-md-6 col-sm-6">
+		<span class="company-size-saved hidden">{{ profile.company_size }}</span>
+		<select class="selectpicker company-size" title="{{ profile.company_size|default:'Choose one of the following...' }}">
+			<option></option>
+			<option>1-5 employees</option>
+			<option>6- 20 employees</option>
+			<option>21-50 employees</option>
+			<option>51-100 employess</option>
+			<option>More than 100 Employees</option>
+	
+		</select>
+		<p class="hidden error-message company-size-error">Please Select One</p>
+	</div>
+	<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+	
+	<label class="col-md-3 col-sm-3 font-normal">Preferred work location</label>
+	<div class="col-md-6 col-sm-6">
+		<select class="work-location">
+		  <option value="">{{ profile.work_location|default:"---- Please Select One ----" }}</option>
+		  {% for co in countries %}
+		  	<option value="{{ co.0 }}">{{ co.1 }}</option>
+		  {% endfor %}
+		  <option disabled>-----------------------------</option>
+		  <option value="new">rest of Afica</option>
+		  <option value="new">Europe</option>
+		  <option value="new">Asia</option>
+		  <option value="new">Middle East</option>
+		  <option value="new">The Americas</option>
+		</select>
+
+		<div class="job-seeker-content-spacing"></div>
+
+		<textarea class="form-control other-location hidden" placeholder="Please Specify"></textarea>
+	</div>
+	<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+	<label class="col-md-3 col-sm-3">Job Level: *</label>
+	<div class="col-md-6 col-sm-6">
+		<span class="hidden job-saved">{{ profile.job_level }}</span>
+		<select class="selectpicker job-level" title="{{ profile.job_level|default:'Choose one of the following...' }}">
+			<option></option>
+			<option>Internship</option>
+			<option>Entry level</option>
+			<option>Mid level</option>
+			<option>Senior level</option>
+		</select>
+		<p class="error-message hidden job-level-error">Please select One</p>
+	</div>
+	<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+	<label class="col-md-3 col-sm-3">Availability: *</label>
+	<div class="col-md-6 col-sm-6">
+		<span class="hidden available-saved">{{ profile.availability }}</span>
+		<select class="selectpicker available" title="{{ profile.availability|default:'Choose one of the following...' }}">
+			<option></option>
+			<option>Immediately</option>
+			<option>1 week</option>
+			<option>2 weeks</option>
+			<option>3 weeks</option>
+			<option>4 weeks</option>
+			<option value='set-date' class="light-blue">Specify date</option>
+		</select>
+
+		<div class="job-seeker-content-spacing"></div>
+		<input class="form-control hidden" id="start-date" placeholder="{{ profile.start_date|date:"d/m/Y"|default:'Please Specify' }}">
+		<p class="error-message hidden available-error">Please select One</p>
+	</div>
+	<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+	<label class="col-md-3 col-sm-3 font-normal">Expected Salary</label>
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<input type="text" class="min-salary form-control" placeholder="{{ profile.min_salary|default:'Mininum Salary' }}">
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-6">
+				<input type="text" class="max-salary form-control" placeholder="{{ profile.max_salary|default:'Maximum Salary' }}">
+			</div>
+		</div>
+		
+	</div>
+	<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+	<label class="col-md-3 col-sm-3 font-normal">Salary's Currency</label>
+	<div class="col-md-6 col-sm-6">
+		<select class="selectpicker currency" title="Select One">
+			<option></option>
+			<option>Ksh</option>
+			<option>USD</option>
+		</select>
+	</div>
+	<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+	<div class="col-md-12 col-sm-12 text-center profile-btns-div">
+		{% if prev %}<a href="{{ prev }}" class="btn btn-default profile-update-btns"><< Prev</a>{% endif %}
+		<a class="btn btn-primary update" href="#">Update</a>
+		{% if next %}<a href="{{ next }}" class="btn btn-default update profile-update-btns" state="next">Next >></a>{% endif %}
+	</div>
+
+	<div class="col-sm-12 col-md-12">
+		<div class="col-md-12 text-center">
+			<i class="fa fa-circle-o-notch fa-spin loading hidden" aria-hidden="true"></i>
+		</div>
+		<p class="hidden error-message small-padding-left response-error">Sorry there seems to be an issue connecting to the server. Please try again later.</p>
+    	<p class="server-error-message hidden error-message"></p>
+    	<p class="complete-message hidden soft-green">Update Complete</p>
+	</div>
+</div>
+{% endblock %}
+

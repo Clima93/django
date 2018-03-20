@@ -1,0 +1,41 @@
+
+</head>
+<body>
+	<div class="homepage">
+		<div class="top-navigation">
+			<nav class="navbar navbar-default navbar-fixed-top float-left">
+			  <div class="container-fluid">
+			    <!-- Brand and toggle get grouped for better mobile display -->
+			    <div class="navbar-header">
+			      <button type="button" class="navbar-toggle collapsed float-right" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			        <span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			      </button>
+			      <a class="navbar-brand" href="/"><span class="visible-xs alt-title">KaziLynk</span><img src="/static/img/logo.png" alt="Kazi Logo" class="hidden-xs hidden-sm" style="width: 100%;"><span class="sr-only">(current)</span></a>
+			      <a class="navbar-brand" href="/"><span class="visible-xs alt-title">KaziLynk</span><img src="/static/img/logo.png" alt="Kazi Logo" class="visible-xs visible-sm" style="width: 104px; position: absolute; left: 0px; top: 4px;"><span class="sr-only">(current)</span></a>
+			    </div>
+
+			    <!-- Collect the nav links, forms, and other content for toggling -->
+			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			      <div class="nav-top-padding"></div>
+			      <ul id="top_nav" class="nav navbar-nav pull-right">
+			        <li class=""><a href="{% url 'check_post_job' %}">Post a Job</a></li>
+			        <li><a href="{% url 'check_post_cv' %}">Post your CV</a></li>
+			        <li><a href="{% url 'check_post_service' %}">Post your service</a></li>
+			        <li><a href="{% url 'search' %}">Find a service</a></li>
+			        <li><a href="{% url "lynkspiration" %}">Lynk-spirations</a></li>
+			        {% if not request.user.is_active %}
+				        <li class="nav-login_li-1"><a href="/accounts/login">Log In</a></li>
+				    {% else %}
+				    	<li><a href="/accounts/profile" class="pull-right"><i class="fa fa-user profile-icon" aria-hidden="true"></i></a></li>
+				    	<li><a href="/accounts/logout" class="pull-right">Log Out</a></li>
+				    {% endif %}
+			      </ul>
+			    </div><!-- /.navbar-collapse -->
+
+			    <div 
+			  </div><!-- /.container-fluid -->
+			</nav>
+		</div>

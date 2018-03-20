@@ -1,0 +1,41 @@
+{% for service in services %}
+{{ service.name }}
+	Active Providers: {{ service.active_providers }}
+
+{% for service in service.users.all %}
+	{% if service.active %}
+		Company Name: {{ service.company_name }}
+		{% if service.location %}
+		Location: {{ service.location }}
+		{% endif %}
+
+		{% if service.testimonial %}
+		Testimonial: {{ service.testimonial }}
+		{% endif %}
+
+		{% if service.business_details %}
+		Business Details: {{ service.business_details }}
+		{% endif %}
+
+		{% for link in service.links.all %}
+		{% if link.active %}
+			{{ link.link }}
+		{% endif %}
+		{% endfor %}
+
+		Price: {{ service.price }}
+		Negotiable: {{ service.negotiable_text }}
+
+		{% if service.prices.all %}
+		More Prices:
+
+		{% for price in service.prices.all %}
+			{{ price.name }}
+		{% endfor %}
+		{% endif %}
+		<a href="https://kazilynk.com{% url 'contact_provider' service.id %}?email={{ email }}">Contact/Hire</a>
+	{% endif %}
+
+{% endfor %}
+
+{% endfor %}

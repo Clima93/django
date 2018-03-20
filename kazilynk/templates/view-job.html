@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load thumbnail %}
+
+{% block title %}{{ job.job_title|default:"Job Not Found" }}{% endblock %}
+
+{% block content %}
+<div class="col-md-1 col-sm-1 hidden-xs"></div>
+<div class="col-md-10 col-sm-10 col-xs-12 margin-top-20">
+	{% if job %}
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<h3 class="text-center">{{ job.job_title }}</h3>
+			
+			<p><a href="{% url 'profile_page' %}">View Profile</a>{% ifequal profile job.profile %} | <a href="{% url 'edit_job' job.id %}">Edit Post</a>{% endifequal %}  |  {% ifequal profile job.profile %}<a href="{% url 'delete_job' job.id %}">Delete Post</a>{% endifequal %}</p>
+			
+			<p><span class="bold">Company Name: </span>{{ job.company_name }}</p>
+			<p><span class="bold">Company Size: </span>{{ job.company_size }}</p>
+
+			<p><span class="bold">Key Responsibilities: </span>{{ job.responsibility }}</p>
+			
+			{% if job.job_type %}
+			<p><span class="bold">Job Type: </span>{{ job.job_type }}</p>
+			{% endif %}
+
+			{% if job.start_date %}
+				<p><span class="bold">Start Date: </span> {{ job.start_date }}</p>
+			{% endif %}
+
+			{% if job.end_date %}
+				<p><span class="bold">Expiry Date: </span> {{ job.end_date }}</p>
+			{% endif %}
+
+			{% if job.min_salary %}
+				<p><span class="bold">Min Salary: </span>{{ job.currency }} {{ job.min_salary }}</p>
+			{% endif %}
+
+			{% if job.max_salary %}
+				<p><span class="bold">Max Salary: </span>{{ job.currency }} {{ job.max_salary }}</p>
+			{% endif %}
+
+			{% if job.job_level %}
+				<p><span class="bold">Job Level: </span>{{ job.job_level }}</p>
+			{% endif %}
+
+			{% if job.personality %}
+				<p><span class="bold">Personality Preferences: </span>{{ job.personality }}</p>
+			{% endif %}
+
+			{% if job.work_location %}
+				<p><span class="bold">Work Location: </span>{{ job.work_location }}</p>
+			{% endif %}
+
+			{% if job.education_level %}
+				<p><span class="bold">Education Level: </span>{{ job.education_level }}</p>
+			{% endif %}
+
+			{% if job.institutions.all %}
+				<p class="bold">Preffered Insitutions</p>
+				<ul>
+					{% for institution in job.institutions.all %}
+						<li>{{ institution.name }}</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+
+			{% if job.training %}
+				<p><span class="bold">Training: </span>{{ job.training }}</p>
+			{% endif %}
+
+			{% if job.work_experience %}
+				<p><span class="bold">Work Experience: </span>{{ job.work_experience }}</p>
+			{% endif %}
+
+			{% if job.skills.all %}
+				<p class="bold">Skills Needed</p>
+				<ul>
+					{% for skill in job.skills.all %}
+					<li>{{ skill.name }}</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+
+			{% if job.hard_skills.all %}
+				<p class="bold">HardSkills Needed</p>
+				<ul>
+					{% for skill in job.hard_skills.all %}
+					<li>{{ skill.name }}</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+
+			{% if job.languages.all %}
+				<p class="bold">Languages Required</p>
+				<ul>
+				{% for language in job.languages.all %}
+					<li><span class="bold">{{ language.name }}</span>; {% if language.reading_level %}<span class="bold">Reading Level: </span>{{ language.reading_level }},{% endif %}  {% if language.writing_level %}<span class="bold">Writing Level: </span>{{ language.writing_level }},{% endif %}  {% if language.verbal_level %}<span class="bold">Verbal Level: </span>  {{ language.verbal_level }}{% endif %}</li>
+				{% endfor %}
+				</ul>
+			{% endif %}
+
+		</div>
+	{% else %}
+		<p class='error-message'>Job couldn't be found, it's either expired or it's been taken down.</p>
+	{% endif %}
+</div>
+{% endblock %}

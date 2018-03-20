@@ -1,0 +1,23 @@
+{% if services %}
+	{% for service in services %}
+		<p><span class="bold">{{ service.name }}</span> active providers: <span class="light-blue">{{ service.no_active_providers }}</span></p>
+		<p class="bottom-border"></p>
+	{% endfor %}
+	
+{% endif %}
+
+{% if jobs %}
+	{% for job in jobs %}
+		<h3>{{ job.job_title }}</h3>
+		<p>{{ job.responsibility|truncatewords:20 }}</p>
+		<p><span class"bold">Expires on: </span>{{ job.end_date }}</p>
+		<p class="bottom-border"></p>
+	{% endfor %}
+{% endif %}
+
+{% if users %}
+	{% for user in users %}
+		<p>{{ user.first_name }} {{ user.last_name }} {% if admin %}<a href="{% url 'view_profile' user.id %}">View Profile</a>{% endif %}</p>
+
+	{% endfor %}
+{% endif %}

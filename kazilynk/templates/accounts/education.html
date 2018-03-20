@@ -1,0 +1,113 @@
+{% extends 'accounts/profile.html' %}
+
+{% block title %}KaziLynk Education{% endblock %}
+
+{% block extra_css %}
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker3.min.css">
+{% endblock %}
+
+{% block extra_js %}
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="/static/js/education-script.js?v=1.1"></script>
+{% endblock %}
+
+{% block content_box %}
+<div class="quicksand col-md-12 col-sm-12 col-xs-12">
+	<h3 class="bottom-border padding-bottom-10 margin-bottom-20">Education</h3>
+
+	{% if profile.education_incomplete %}
+		<p class="error-message">Please Fill all these fields: Education Level, Name</p>
+	{% endif %}
+
+	{% for exp in education_exp %}
+		<div class="work-experience-div col-md-12 col-sm-12 co-xs-12 col-lg-12" exp_id="{{ exp.id }}">
+		<label class="col-md-3 col-sm-3">Education Level Attained</label>
+		<div class="col-md-8 col-sm-6">
+			<select class="selectpicker education-level" title="{{ exp.level|default:'Choose one of the following...' }}" state="{{ exp.level }}">
+				<option></option>
+				<option>University</option>
+				<option>College</option>
+				<option>High school</option>
+				<option value="other">Other</option>
+			</select>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+			<input type="text" name="" class="form-control education-other job-seeker-content-spacing hidden" placeholder="Please Specify">
+			
+		</div>
+		<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+		<label class="col-md-3 col-sm-3">Name of Institution attended</label>
+		<div class="col-md-6 col-sm-6">
+			<select class="selectpicker institute-name job-seeker-content-spacing" title="{{ exp.institute.name|default:'Choose one of the following...' }}" state="{{ exp.institute.name }}">
+				<option></option>
+				{% for ins in institutions %}
+					<option>{{ ins.name }}</option>
+				{% endfor %}
+				<option value="new">New: Add</option>
+			</select>
+			<input type="text" name="" class="form-control institute-new hidden job-seeker-content-spacing" placeholder="Please Specify">
+		</div>
+		<div class="col-md-12 col-sm-12 job-seeker-content-spacing">
+			<a href='#' class='remove-exp pull-right'>Remove</a>
+		</div>
+	</div>
+	{% endfor %}
+
+	{% if not education_exp %}
+		<div class="work-experience-div col-md-12 col-sm-12 co-xs-12 col-lg-12" exp_id="">
+			<label class="col-md-3 col-sm-3">Education Level Attained</label>
+			<div class="col-md-8 col-sm-6">
+				<select class="selectpicker education-level" title="Choose one of the following...">
+					<option></option>
+					<option>University</option>
+					<option>College</option>
+					<option>High school</option>
+					<option value="other">Other</option>
+				</select>
+				<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+				<input type="text" name="" class="form-control education-other job-seeker-content-spacing hidden" placeholder="Please Specify">
+				
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+			<label class="col-md-3 col-sm-3">Name of Institution attended</label>
+			<div class="col-md-6 col-sm-6">
+				<select class="selectpicker institute-name job-seeker-content-spacing" title="Choose one of the following...">
+					<option></option>
+					{% for ins in institutions %}
+						<option>{{ ins.name }}</option>
+					{% endfor %}
+					<option value="new">New: Add</option>
+				</select>
+				<input type="text" name="" class="form-control institute-new hidden job-seeker-content-spacing" placeholder="Please Specify">
+			</div>
+			<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+		</div>
+	{% endif %}
+
+	<div class="new-edu"></div>
+	
+	<div class="col-sm-12 col-md-12"><a href="#" class="duplicate">Add another</a></div>
+
+	<div class="col-md-12 col-sm-12 text-center profile-btns-div">
+		{% if prev %}<a href="{{ prev }}" class="btn btn-default profile-update-btns"><< Prev</a>{% endif %}
+		<a class="btn btn-primary update" href="#">Update</a>
+		{% if next %}<a href="{{ next }}" class="btn btn-default update profile-update-btns" state="next">Next >></a>{% endif %}
+	</div>
+
+	<div class="col-sm-12 col-md-12">
+		<div class="col-md-12 text-center">
+			<i class="fa fa-circle-o-notch fa-spin loading hidden" aria-hidden="true"></i>
+		</div>
+		<p class="hidden error-message small-padding-left response-error">Sorry there seems to be an issue connecting to the server. Please try again later.</p>
+		<p class="hidden error-message small-padding-left response-message"></p>
+    	<p class="server-error-message hidden error-message"></p>
+    	<p class="complete-message hidden soft-green">Update Complete</p>
+	</div>
+</div>
+{% endblock %}

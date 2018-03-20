@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}KaziLynk Homepage{% endblock %}
+
+{% block extra_css %}
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+{% endblock %}
+##
+{% block extra_js %}
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="{% static 'js/jquery.cookie.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/home-script.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+	<div class="col-md-12">
+		<div class="col-md-2 hidden-sm hidden-xs"></div>
+		<div class="col-md-8 col-sm-11 col-xs-11">
+			<label class="border-label hidden-xs">
+				<input class="form-control search-box" placeholder="Type Keyword ex. sales">
+				<select class="selectpicker search-type pull-right" title="Please select category">
+					<option></option>
+					<option>Service</option>
+					<option>Job</option>
+					<option>Candidate by skill/name</option>
+				</select>
+				<i class="fa fa-search search-icon" aria-hidden="true"></i>
+			</label>
+
+			<div class="below-search hidden-xs">
+				<h3>OR</h3>
+			</div>
+			<div class="b2 col-md-12 hidden-xs">
+				<label class="btn-label-cv">
+					<a href=""><button class="btn post-cv no-border-radius">POST A JOB</button></a>
+				</label>
+				<label class="btn-label-cv middle">
+					<a href=""><button class="btn post-cv no-border-radius">POST A CV</button></a>
+				</label>
+				<label class="btn-label-cv pull-right float-left-sm">
+					<a href=""><button class="btn post-cv no-border-radius">POST A SERVICE</button></a>
+				</label>
+			</div>
+			
+		</div>
+		<div class="col-md-2 hidden-sm hidden-xs"></div>
+		<img class="img-responsive main-img" src="{% static 'img/homepage-img.jpg' %}" style="width: 100%;"/>
+
+		<div class="visible-xs hidden-sm hidden-md hidden-lg mobile-search">
+			<input class="form-control search-box remove-absolute search-mobile" placeholder="Type Keyword ex. sales">
+			<select class="selectpicker search-type margin-bottom-10" title="Please select category">
+				<option></option>
+				<option>Service</option>
+				<option>Job</option>
+				<option>Candidate by skill/name</option>
+			</select><br>
+			<button class="btn btn-primary search-btn">Search</button>
+		</div>
+		
+	</div>
+
+
+		
+		
+
+	<!-- <div id="intro" class="col-md-12 col-sm-12 col-xs-12 text-center home-top-title raleway">
+		<h2>How Kazilynk Works</h2>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<p class="dark-grey font-size-20 margin-bottom-20">For the employer</p>
+			<img src="/static/img/employer.png?v=1" class="img-responsive center">
+			<p>Post a job and get matched with ONLY the most suitable candidates</p>
+			
+			<a href="" class="btn orange-btn margin-bottom-10">POST A JOB</a>
+		
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<p class="dark-grey font-size-20 margin-bottom-20">For the job seeker</p>
+			<img src="/static/img/job-seeker.png?v=1" class="img-responsive center">
+			<p>Post your CV and get matched with the job that fits your talents and skills</p>
+			
+			<a href="{% url 'check_post_cv' %}" class="btn orange-btn margin-bottom-10">POST A CV</a>
+			
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<p class="dark-grey font-size-20 margin-bottom-20">For the service provider</p>
+			<img src="/static/img/service-provider.png?v=1" class="img-responsive center">
+			<p>Specify the type of service you provide and we will find the customers for it</p>
+			
+			<a href="{% url 'check_post_service' %}" class="btn orange-btn margin-bottom-10">POST A SERVICE</a>
+			
+		</div>
+		<div class="col-md-3 col-sm-6 col-xs-12">
+			<p class="dark-grey font-size-20 margin-bottom-20">For those seeking a service</p>
+			<img src="/static/img/seeking-service.png?v=1" class="img-responsive center">
+			<p>Specify the type of service you need and we will find you a suitable providers</p>
+			<a href="{% url 'search' %}" class="btn orange-btn margin-bottom-10">FIND A SERVICE</a>
+		</div>
+	</div> -->
+	
+	<div class="col-md-12 col-sm-12 col-xs-12 text-center opp-section raleway">
+		<div class="col-md-4 col-xs-6 col-sm-6">
+			<p class="big light-blue">100+</p>
+			<p>--OPPORTUNITIES--</p>
+		</div>
+		<div class="col-md-4 col-xs-6 col-sm-6">
+			<p class="big soft-green">300+</p>
+			<p>--RESUMES--</p>
+		</div>
+		<div class="col-md-4 col-xs-11 col-sm-11">
+			<p class="big orange-link">300+</p>
+			<p>--SERVICES--</p>
+		</div>
+	</div>
+
+	<!--<div class="col-md-12 text-center latest-section">
+		<h2 class="dark-grey">Latest on Kazilynk</h2>
+		<span>----------------------</span>
+	</div>-->
+	<div class="col-md-12 col-sm-12 col-xs-12 lynk-spiration-section raleway">
+		<!-- <h2 class="text-center dark-grey">Lynk-spirations</h2>
+		{% for article in articles %}
+			<div class="col-md-3 col-sm-11 col-xs-12">
+				
+				    <img src="{{ im.url }}" class="img-responsive">
+				
+				<a href="{% url 'view_article' article.slug_text %}"><h4 class="bold">{{ article.title }}</h4></a>
+				<p>{{ article.description|truncatewords:20 }}</p>
+				<a href="{% url 'view_article' article.slug_text %}">READ ON</a>
+				<p class="blue-border-bottom margin-top-10"></p>
+			</div>
+		{% endfor %} -->
+<h2 class="text-center dark-grey">News Feed</h2>
+<ul>
+{% for Job in object_list %}
+<li>{{ Job.created_on }} - {{ Job.job_title }}</li>
+{% empty %}
+<li>No Job yet.</li>
+{% endfor %}
+</ul>
+	</div>
+
+	<!-- Modals -->
+
+	<div id="search-modal" class="modal fade" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title search-modal-title bold">Search result for: <span class="search-term"></span></h4>
+	      </div>
+	      <div class="modal-body padding-bottom-30">
+	        <h3 class="hidden no-result">Sorry! your search for '<span class="search-term"></span>' yielded no results</h3>
+	        <h3 class="hidden results-found">Great news! your search for "<span class="search-term"></span>" yielded <span class="results-no"></span> results</h3>
+
+        	<div class="search-result">
+        		
+        	</div>
+
+        	{% if not request.user.is_authenticated %}
+        		<p class="login-first">You can <a href="/accounts/login">register</a> for free to get full access.</p>
+        		<p class="hidden margin-bottom-10 service-alert">or enter you're email below to receive full details on email</p>
+				<input class="hidden service-alert form-control service-email newsletter-field" placeholder="email@example.com">
+				<button class="hidden service-alert send-alert btn btn-primary margin-top-sm-10">Send</button>
+        	{% endif %}
+        	<button class="hidden service-update btn btn-primary">Send to Email</button>
+
+        	<a href="#" class="btn btn-primary hidden view-more margin-top-10 margin-bottom-10">View More</a>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<!-- End Modals -->
+
+{% endblock %}

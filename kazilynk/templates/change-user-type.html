@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}KaziLynk | Change User Type{% endblock %}
+
+{% block extra_css %}
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+{% endblock %}
+
+{% block extra_js %}
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="/static/js/user-type-script.js"></script>
+{% endblock %}
+
+{% block content %}	
+<div class="hidden-xs col-md-2 col-sm-2"></div>
+<div class="col-md-8 col-sm-8 col-xs-12 margin-bottom-20" style="margin-left: 5px;">
+	<h3 class="text-center margin-bottom-20">Change User Type</h3>
+
+	<select class="selectpicker user-type margin-bottom-20" title="Select User Type">
+		<option></option>
+		<option>Job Seeker</option>
+		<option>Employer</option>
+		<option>Service Seeker</option>
+		<option>Service Provider</option>
+	</select>
+		
+	<button class="btn btn-primary update-user-type">Update</button>
+	<div class="col-md-12 col-sm-12 col-xs-12 margin-top-20 margin-bottom-20">
+		<p class="hidden green complete">User type updated successfully</p>
+		<p class="error-message select-user hidden">Please Select One User Type</p>
+	</div>
+	
+</div>
+{% endblock %}

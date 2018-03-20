@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if request.user.is_staff %}Profile: {{ user_profile.first_name|default:"New Guy" }} {{ user_profile.last_name }}{% else %}Access Denied{% endif %}{% endblock %}
+
+{% block content %}
+	{% if request.user.is_staff %}
+		{% ifequal user_profile.category "Job Seeker" %}
+			{% include 'snippets/job-seeker-profile.html' %}
+		{% endifequal %}
+
+		{% ifequal user_profile.category "Employer" %}
+			{% include 'snippets/employer-profile.html' %}
+		{% endifequal %}
+
+		{% ifequal user_profile.category "Service Seeker" %}
+			<p>Service Seeker</p>
+		{% endifequal %}
+
+		{% ifequal user_profile.category "Service Provider" %}
+			{% include 'snippets/service-provider-profile.html' %}
+		{% endifequal %}
+				
+	{% else %}
+		<p class="error-message text-center">You are not permitted to view this page</p>
+	{% endif %}
+{% endblock %}

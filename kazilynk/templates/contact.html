@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}KaziLynk | Contact Us{% endblock %}
+
+{% block extra_css %}
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+{% endblock %}
+
+{% block extra_js %}
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="/static/js/contact-script.js?v=1.2"></script>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12 col-sm-12 col-xs-12">
+	<div class="hidden-xs col-md-1 col-sm-1"></div>
+	<div class="col-md-10 col-sm-10 col-xs-12 margin-bottom-20 margin-top-20">
+		<h3 class="text-center bold margin-bottom-20">Contact Us</h3>
+		<label class="col-md-2 col-sm-4 col-xs-12">Email:</label>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<input class="form-control email" placeholder="email@example.com">
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-10"></div>
+
+		<label class="col-md-2 col-sm-4 col-xs-12">Select a category:</label>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<select class="selectpicker issue" title="Select one">
+				<option></option>
+				<option>Contact Sales</option>
+				<option>Contact Support</option>
+				<option>Contact Tech Support</option>
+				<option>Contact Admin</option>
+			</select>
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-10"></div>
+
+		<label class="col-md-2 col-sm-4 col-xs-12">Type Message:</label>
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<textarea class="form-control textarea-height message"></textarea>
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12 margin-bottom-10"></div>
+
+		<label class="col-md-2 col-sm-4 col-xs-12"></label>		
+		<div class="col-md-6 col-sm-6 col-xs-12 margin-bottom-20">
+			<button class="btn orange-btn send margin-bottom-10">Send</button>
+			<p class="hidden green complete">Sent Successfully</p>
+			<p class="hidden error-message"></p>
+			<div class="col-md-12 text-center">
+				<i class="fa fa-circle-o-notch fa-spin loading hidden" aria-hidden="true"></i>
+			</div>
+		</div>
+
+	</div>
+</div>
+{% endblock %}

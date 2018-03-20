@@ -1,0 +1,53 @@
+{% extends 'accounts/employer_profile.html' %}
+
+{% block title %}KaziLynk | Job Applications{% endblock %}
+
+{% block extra_css %}
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+	<link rel="stylesheet" href="/static/css/bootstrap-datetimepicker.min.css">
+	<link rel="stylesheet" href="/static/css/chosen.css">
+	<link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
+	<link href="/static/css/jquery.tagit.css" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block extra_js %}
+	<!-- Latest compiled and minified JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+	<script type="text/javascript" src="/static/js/bootstrap-datetimepicker.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="/static/js/chosen.jquery.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/static/js/tag-it.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		$(function() { 
+			$('.company-name').val('{{ profile.company_name }}');
+			$('.company-size').val('{{ profile.company_size }}');
+			$('.selectpicker').selectpicker('refresh');
+		});
+	</script>
+	<script type="text/javascript" src="/static/js/profile-jobs-script.js?v=1.3"></script>
+{% endblock %}
+
+{% block content_box %}
+<div class="col-md-12 col-sm-12 col-xs-12 quicksand">
+	<h4 class="text-center margin-bottom-20 bold padding-bottom-10 bottom-border">Create New Job Post</h4>
+	
+	{% include 'snippets/job-form.html' %}
+
+	<div class="col-md-12 col-sm-12 col-xs-12 text-center margin-bottom-20 margin-top-20">
+		<button class="btn orange-btn save-job">Save Job</button>
+	</div>
+
+	<div class="col-sm-12 col-md-12 col-xs-12">
+		<div class="col-md-12 text-center">
+			<i class="fa fa-circle-o-notch fa-spin loading hidden" aria-hidden="true"></i>
+		</div>
+		<p class="missing-field error-message hidden">Please fill out missing fields in red above.</p>
+		<p class="hidden error-message small-padding-left response-error">Sorry there seems to be an issue connecting to the server. Please try again later.</p>
+    	<p class="server-error-message hidden error-message"></p>
+    	<p class="complete-message hidden soft-green">Update Complete</p>
+	</div>
+</div>
+{% endblock %}

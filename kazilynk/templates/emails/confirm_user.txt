@@ -1,0 +1,10 @@
+Welcome to KaziLynk
+
+Thank you for registering with KaziLynk.
+
+To Finish registration please visit this link {{ confirmation_link }}
+
+Please note this link will expire in 5 days.
+
+Regards,
+The KaziLynk Team.

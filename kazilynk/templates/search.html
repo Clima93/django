@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block title %}KaziLynk | Search{% endblock %}
+
+{% block extra_css %}
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+{% endblock %}
+
+{% block extra_js %}
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="/static/js/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="/static/js/search-script.js?v=1.2"></script>
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12 col-sm-12 col-xs-12">
+	<div class="hidden-xs col-md-1 col-sm-1"></div>
+	<div class="col-md-10 col-sm-10 col-xs-12 margin-bottom-20 margin-top-20">
+		<h3 class="text-center">Search for Job, Service & Candidate by skill/name</h3>
+		
+		<div class="visible-xs hidden-sm hidden-md hidden-lg">
+			<input class="form-control search-box remove-absolute search-mobile" placeholder="Type Keyword ex. sales">
+			<select class="selectpicker search-type margin-bottom-10" title="Please select category">
+				<option></option>
+				<option>Service</option>
+				<option>Job</option>
+				<option>Candidate by skill/name</option>
+			</select><br>
+			<button class="btn btn-primary search-btn">Search</button>
+		</div>
+
+		<label class="hidden-xs visible-sm visible-md visible-lg">
+			<input class="form-control search-box" placeholder="Type Keyword ex. sales">
+			<select class="selectpicker search-type pull-right" title="Please select category">
+				<option></option>
+				<option>Service</option>
+				<option>Job</option>
+				<option>Candidate by skill/name</option>
+			</select>
+			<i class="fa fa-search search-icon bottom-0" aria-hidden="true"></i>
+		</label>
+
+		<div class=" col-md-12 col-sm-12 col-xs-12 margin-top-20">
+			<h3 class="hidden no-result">Sorry! your search for '<span class="search-term"></span>' yielded no results</h3>
+	        <h3 class="hidden results-found">Great news! your search for "<span class="search-term"></span>" yielded <span class="results-no"></span> results</h3>
+		</div>
+		<div class="col-md-12 col-sm-12 col-xs-12 search-result">
+
+		</div>
+
+		<div class="col-md-12 col-sm-12 col-xs-12">
+		{% if not request.user.is_authenticated %}
+			<p class="login-first">You can <a href="/accounts/login">register</a> for free to get full access.</p>
+    		<p class="hidden margin-bottom-10 service-alert">or enter you're email below to receive full details on email</p>
+			<input class="hidden service-alert form-control service-email newsletter-field" placeholder="email@example.com">
+			<button class="hidden service-alert send-alert btn btn-primary">Send</button>
+		
+    	{% endif %}
+    		<button class="hidden service-update btn btn-primary">Send to Email</button>
+    	</div>
+
+	</div>
+</div>
+{% endblock %}

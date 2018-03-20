@@ -1,0 +1,29 @@
+<div class="work-experience-div col-md-12 col-sm-12 co-xs-12 col-lg-12" exp_id="">
+	<label class="col-md-3 col-sm-3">Education Level Attained</label>
+	<div class="col-md-8 col-sm-6">
+		<select class="selectpicker education-level" title="Choose one of the following...">
+			<option></option>
+			<option>University</option>
+			<option>College</option>
+			<option>High school</option>
+			<option value="other">Other</option>
+		</select>
+		<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+		<input type="text" name="" class="form-control education-other job-seeker-content-spacing hidden" placeholder="Please Specify">
+		
+	</div>
+	<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+
+	<label class="col-md-3 col-sm-3">Name of Institution attended</label>
+	<div class="col-md-6 col-sm-6">
+		<select class="selectpicker institute-name job-seeker-content-spacing" title="Choose one of the following...">
+			<option></option>
+			{% for ins in institutions %}
+				<option>{{ ins.name }}</option>
+			{% endfor %}
+			<option value="new">New: Add</option>
+		</select>
+		<input type="text" name="" class="form-control institute-new hidden job-seeker-content-spacing" placeholder="Please Specify">
+	</div>
+	<div class="col-md-12 col-sm-12 job-seeker-content-spacing"></div>
+</div>

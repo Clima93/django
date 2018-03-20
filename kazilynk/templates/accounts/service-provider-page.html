@@ -1,0 +1,106 @@
+{% extends 'accounts/service-provider-profile.html' %}
+{% load thumbnail %}
+
+{% block title %}KaziLynk | Service Provider{% endblock %}
+
+{% block extra_css %}
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css">
+{% endblock %}
+
+{% block extra_js %}
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	
+{% endblock %}
+
+{% block content_box %}
+<div class="col-md-12 col-sm-12 col-xs-12 grey-bg no-margin-round width-plus20px padding-top-10">
+	<h4 class="text-center bold">MY PROFILE DASHBOARD</h4>
+
+	<div class="col-md-4 col-sm-4 col-xs-12">
+		{% if profile.image %}
+		{% thumbnail profile.image "250x400" as im %}
+			<img src="{{ im.url }}" class="img-responsive margin-bottom-10 center">
+		{% endthumbnail %}
+		{% endif %}
+		<div class="row">
+			<div class="col-md-12 col-sm-12 col-xs-12 text-center">
+				<button class="btn btn-primary profile-photo margin-bottom-10">Change Profile Photo</button>
+			</div>
+		</div>
+		
+		<form action="{% url 'profile_page' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+			<input type="file" class="prof-pic hidden" name="prof-pic">
+			<input type="submit" class="prof-submit hidden">
+		</form>
+
+		<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-top-20 margin-bottom-20">
+			<h4 class="text-center">PERSONAL DETAILS</h4>
+			<p><span class="bold">Name: </span>{{ profile.first_name }} {{ profile.last_name }}</p>
+			<p><span class="bold">Email: </span>{{ profile.user.email }}</p>
+			<p><span class="bold">Phone: </span>{{ profile.phone }}</p>
+		</div>
+
+	</div>
+
+	<div class="col-md-8 col-sm-8 col-xs-12">
+		<h4 class="text-center">Services</h4>
+
+		{% for service in profile.services.all %}
+			{% if service.active %}
+			<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-bottom-20 padding-top-10">
+				<a href="{% url 'view_service' service.id %}" class="dark-grey"><i class="fa fa-pencil profile-edit-icon" aria-hidden="true"></i></a>
+				<p><span class="bold">Service Name: </span> <a href="{% url 'view_service' service.id %}">{{ service.service.name|safe }}</a></p>
+				<p><span class="bold">Company Name: </span> {{ service.company_name }}</p>
+				<p><span class="bold">Email: </span> {{ service.email }}</p>
+				<p><span class="bold">Phone No: </span> {{ service.phone }}</p>
+
+				{% if service.company_website %}
+				<p><span class="bold">Company Website: </span> {{ service.company_website }}</p>
+				{% endif %}
+
+				<p><span class="bold">Business Details: </span></p>
+				{{ service.biz_details_html|safe }}
+
+				{% if service.testimonial %}
+				<p><span class="bold margin-bottom-20">Testimonial: </span> {{ service.testimonial }}</p>
+				{% endif %}
+
+				{% if service.links.all %}
+					<p class="bold">Links</p>
+					<ul>
+					{% for link in service.links.all %}
+						<li><a href="{{ link.link }}">{{ link.link }}</a></li>
+					{% endfor %}
+					</ul>
+					
+				{% endif %}
+				
+				{% if service.location %}
+				<p><span class="bold">Location: </span> {{ service.location }}</p>
+				{% endif %}
+
+				<p><span class="bold">Price: </span> {{ service.price }}</p>
+				{% if service.prices.all %}
+					<p class="bold">Other Prices</p>
+					<ul>
+					{% for price in service.prices.all %}
+						<li>{{ price.name }}</li>
+					{% endfor %}
+					</ul>
+					
+				{% endif %}
+				<p><span class="bold">Price Negotiable: </span> {{ service.negotiable_text }}</p>
+
+				{% if service.uploads.all %}
+				<p><span class="bold">Number of Attachments: </span>{{ service.uploads.all|length }}</p>
+				{% endif %}
+			</div>
+			{% endif %}
+		{% endfor %}
+	</div>
+</div>
+
+{% endblock %}

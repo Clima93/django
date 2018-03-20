@@ -1,0 +1,160 @@
+{% load thumbnail humanize %}
+
+<div class="col-md-3 col-sm-2 col-xs-12 padding-top">
+	<!--
+	
+	-->
+	<div class="padding-left pos-absolute profile-sidenav">
+		<a href="#" class="btn btn-default profile-dashboard-btn">
+			<span class="pull-left">Profile Dashboard</span>
+			
+
+			<i class="fa fa-tachometer pull-right profile-dashboard-icons" aria-hidden="true"></i>
+		</a>
+		
+		<a href="#" class="btn btn-default profile-dashboard-btn">
+			<span class="pull-left">Personal Details</span>
+			<i class="fa fa-check pull-right profile-dashboard-icons green-tick {% if not user_profile.personal_details_complete %}hidden{% endif %}" aria-hidden="true"></i>
+		</a>
+
+		<a href="#" class="btn btn-default profile-dashboard-btn">
+			<span class="pull-left">Job Criteria</span>
+			<i class="fa fa-check pull-right profile-dashboard-icons green-tick {% if not user_profile.job_criteria_complete %}hidden{% endif %}" aria-hidden="true"></i>
+		</a>
+
+		<a href="#" class="btn btn-default profile-dashboard-btn">
+			<span class="pull-left">Work Experience</span>
+			<i class="fa fa-check pull-right profile-dashboard-icons green-tick {% if not user_profile.work_experience_complete %}hidden{% endif %}" aria-hidden="true"></i>
+		</a>
+
+		<a href="#" class="btn btn-default profile-dashboard-btn">
+			<span class="pull-left">Education</span>
+			<i class="fa fa-check pull-right profile-dashboard-icons green-tick {% if not user_profile.education_complete %}hidden{% endif %}" aria-hidden="true"></i>
+			<i class="fa fa-times pull-right profile-dashboard-icons red-x {% if not user_profile.education_incomplete %}hidden{% endif %}" aria-hidden="true"></i>
+		</a>
+
+		<a href="#" class="btn btn-default profile-dashboard-btn">
+			<span class="pull-left">Skills</span>
+			<i class="fa fa-check pull-right profile-dashboard-icons green-tick {% if not user_profile.skills_complete %}hidden{% endif %}" aria-hidden="true"></i>
+		</a>
+
+		<a href="#" class="btn btn-default profile-dashboard-btn">
+			<span class="pull-left">Languages</span>
+			<i class="fa fa-check pull-right profile-dashboard-icons green-tick {% if not user_profile.language_complete %}hidden{% endif %}" aria-hidden="true"></i>
+			<i class="fa fa-times pull-right profile-dashboard-icons red-x {% if not user_profile.language_incomplete %}hidden{% endif %}" aria-hidden="true"></i>
+		</a>
+
+		<a href="#" class="btn btn-default profile-dashboard-btn">
+			<span class="pull-left">My Documents</span>
+			<i class="fa fa-check pull-right profile-dashboard-icons green-tick {% if not user_profile.documents_complete %}hidden{% endif %}" aria-hidden="true"></i>
+		</a>
+
+		<a href="#" class="btn btn-default profile-dashboard-btn progress-btn">
+			<span class="pull-left">Progress</span>
+			<div class="progress progress-div">
+			  <div class="progress-bar {{ user_profile.complete_class }}" role="progressbar" aria-valuenow="{{ user_profile.complete }}"
+			  aria-valuemin="0" aria-valuemax="100" style="width:{{ user_profile.complete }}%">
+			    {{ user_profile.complete }}%
+			  </div>
+			</div>
+		</a>
+
+	</div>
+</div>
+<div class="col-md-8 col-sm-9 col-xs-12 register-div padding-bottom-default {{ special_css }} border-box {% block profile_css %}{% endblock %}">
+	<div class="arima label-bottom">
+		<div class="col-md-12 col-sm-12 col-xs-12 grey-bg no-margin-round width-plus20px padding-top-10">
+			<h4 class="text-center bold">MY PROFILE DASHBOARD</h4>
+
+			<div class="col-md-4 col-sm-4 col-xs-12">
+				{% if user_profile.image %}
+				{% thumbnail user_profile.image "250x400" as im %}
+					<img src="{{ im.url }}" class="img-responsive margin-bottom-10 center">
+				{% endthumbnail %}
+				{% endif %}
+
+				<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-top-20">
+					<h4 class="text-center">PERSONAL DETAILS</h4>
+					<p><span class="bold">Name: </span>{{ user_profile.first_name }} {{ user_profile.last_name }}</p>
+					<p><span class="bold">Email: </span>{{ user_profile.user.email }}</p>
+					<p><span class="bold">Phone: </span>{{ user_profile.phone }}</p>
+					<p><span class="bold">Residence: </span>{{ user_profile.country }}</p>
+					<p><span class="bold">Links: </span></p>
+					<ul>
+						{% for link in user_profile.links.all %}
+							{% if link.active %}
+								<li><a href="{{ link.link }}" target="_blank">{{ link.link|truncatechars:"30" }}</a></li>
+							{% endif %}
+						{%endfor %}
+					</ul>
+				</div>
+
+				<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-top-20 margin-bottom-20">
+					<h4 class="text-center">SKILLS RATING</h4>
+					<p>Under development</p>
+				</div>
+
+			</div>
+			<div class="col-md-8 col-sm-8 col-xs-12">
+				<div class="col-md-12 col-sm-12 col-xs-12 white-bg">
+					<h4 class="text-center">PERSONAL STATEMENT</h4>
+					{{ user_profile.personal_statement_text|safe }}
+				</div>
+
+				<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-top-20">
+					<h4 class="text-center">JOB CRITERIA</h4>
+					<p><span class="bold">Preffered company size: </span>{{ user_profile.company_size }}</p>
+					<p><span class="bold">Preferred work location: </span>{{ user_profile.work_location }}</p>
+					<p><span class="bold">Job Level: </span>{{ user_profile.job_level }}</p>
+					<p><span class="bold">Available from: </span>{{ user_profile.availability }}</p>
+					<p><span class="bold">Salary Range: </span>{{ user_profile.salary_currency }} {{ user_profile.min_salary|intcomma }} - {{ user_profile.max_salary|intcomma }}</p>
+				</div>
+
+				<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-top-20">
+					<a href="{% url 'education' %}" class="dark-grey"><i class="fa fa-pencil profile-edit-icon" aria-hidden="true"></i></a>
+					<h4 class="text-center">EDUCATION</h4>
+					{% for edu in user_profile.education.all %}
+						{% if edu.active %}
+							<p>{{ edu.institute }}</p>
+						{% endif %}
+					{% endfor %}
+				</div>
+
+				<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-top-20">
+					<a href="{% url 'skills' %}" class="dark-grey"><i class="fa fa-pencil profile-edit-icon" aria-hidden="true"></i></a>
+					<h4 class="text-center">SKILLS</h4>
+					<h4>Hard skills</h4>
+					<ul>
+						{% for skill in user_profile.hard_skills.all %}
+							<li>{{ skill.name }}</li>
+						{% endfor %}
+					</ul>
+
+					<h4>Soft skills</h4>
+					<ul>
+						{% for skill in user_profile.skills.all %}
+							<li>{{ skill.name }}</li>
+						{% endfor %}
+					</ul>
+				</div>
+
+				<div class="col-md-12 col-sm-12 col-xs-12 white-bg margin-top-20">
+					<a href="{% url 'language' %}" class="dark-grey"><i class="fa fa-pencil profile-edit-icon" aria-hidden="true"></i></a>
+					<h4 class="text-center">LANGUAGES</h4>
+					{% for lan in user_profile.languages.all %}
+						{% if lan.active %}
+							<p><span class="bold">{{ lan.language }}: </span> Reading: <span class="light-blue">{{ lan.reading_level }}</span> Writing: <span class="light-blue">{{ lan.writing_level }}</span> Verbal: <span class="light-blue">{{ lan.verbal_level }}</span></p>
+						{% endif %}
+					{% endfor %}
+				</div>
+
+				<div class="col-md-12 col-sm-12 col-xs-12 margin-top-20 margin-bottom-20 text-center">
+				{% if user_profile.document %}
+					<a href="{{ user_profile.document.url }}" class="btn btn-success">Download CV</a>
+				{% endif %}
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>

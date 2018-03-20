@@ -1,0 +1,49 @@
+{% extends 'accounts/profile.html' %}
+{% load socialaccount %}
+
+{% block title %}KaziLynk Social{% endblock %}
+
+{% block extra_css %}
+	<!-- Latest compiled and minified CSS 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/css/bootstrap-select.min.css"> -->
+{% endblock %}
+
+{% block extra_js %}
+	<!-- Latest compiled and minified JavaScript 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.1/js/bootstrap-select.min.js"></script> -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+	<script type="text/javascript" src="/static/js/social-script.js?v=1.0"></script>
+{% endblock %}
+
+{% block content_box %}
+<div class="quicksand">
+	<h3 class="bottom-border padding-bottom-10 margin-bottom-20">Social Links</h3>
+
+	<div class="padding-left">
+		<span class="left-section-span">Link your profession circles</span><br>
+
+		<a class="btn btn-default margin-bottom-small {% if profile.linkedin_check %}unlink{% endif %}" href="{% if profile.linkedin_check %}#{% else %}{% provider_login_url "linkedin_oauth2" process="connect" %}{% endif %}" provider="linkedin" role="button"><i class="fa fa-linkedin-square linkedin-icon icon-spacing" aria-hidden="true"></i></i><span class="text light-blue">{% if not profile.linkedin_check %}Link Linkedin{% else %}Unlink{% endif %}</span></a>
+
+
+		<span class="left-section-span margin-top-small">Link your social profile (private)</span><br>
+
+		<a class="btn btn-default margin-bottom-small {% if profile.google_check %}unlink{% endif %}" href="{% if profile.google_check %}#{% else %}{% provider_login_url "google" process="connect" %}{% endif %}" provider="google" role="button"><i class="fa fa-google google-icon icon-spacing" aria-hidden="true"></i><span class="text light-blue">{% if not profile.google_check %}Link Google{% else %}Unlink{% endif %}</span></a>
+
+		<a class="btn btn-default margin-bottom-small {% if profile.facebook_check %}unlink{% endif %}" href="{% if profile.facebook_check %}#{% else %}{% provider_login_url "facebook" process="connect" %}{% endif %}" provider="facebook" role="button"><i class="fa fa-facebook-official facebook-icon icon-spacing" aria-hidden="true"></i><span class="text light-blue">{% if not profile.facebook_check %}Link Facebook{% else %}Unlink{% endif %}</span></a>
+
+		<a class="btn btn-default margin-bottom-small {% if profile.twitter_check %}unlink{% endif %}" href="{% if profile.twitter_check %}#{% else %}{% provider_login_url "twitter" process="connect" %}{% endif %}" provider="twitter" role="button"><i class="fa fa-twitter twitter-icon icon-spacing" aria-hidden="true"></i><span class="text light-blue">{% if not profile.twitter_check %}Link Twitter{% else %}Unlink{% endif %}</span></a>
+
+	</div>
+
+	<div class="col-sm-12 col-md-12">
+		<div class="col-md-12 text-center">
+			<i class="fa fa-circle-o-notch fa-spin loading hidden" aria-hidden="true"></i>
+		</div>
+		<p class="hidden error-message small-padding-left response-error">Sorry there seems to be an issue connecting to the server. Please try again later.</p>
+		<p class="hidden error-message small-padding-left response-message"></p>
+    	<p class="server-error-message hidden error-message"></p>
+    	<p class="complete-message hidden soft-green">Update Complete</p>
+	</div>
+
+</div>
+{% endblock %}
