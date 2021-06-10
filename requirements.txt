@@ -1,6 +1,6 @@
 certifi==2018.1.18
 chardet==3.0.4
-Django==1.8.7
+Django==2.2.24
 django-allauth==0.32.0
 django-ckeditor==5.4.0
 django-countries==5.1.1
